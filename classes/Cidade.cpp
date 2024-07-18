@@ -1,11 +1,9 @@
-#include <iostream>
-using namespace std;
+#include "../headers/Cidade.h"
 
-class Cidade{
-private:
-    string nome;
-public:
-    Cidade(string nome){
-        this->nome = nome;
-    }
-};
+Cidade::Cidade(string nome) {
+    this->nome = nome;
+}
+
+string Cidade::getNome() {
+    return this->nome;
+}
