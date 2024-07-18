@@ -1,1 +1,10 @@
 g++ main.cpp classes/Cidade.cpp classes/Controlador.cpp classes/Passageiro.cpp classes/Trajeto.cpp classes/Transporte.cpp classes/Viagem.cpp -o meu_programa && ./meu_programa
+
+classes/Cidade.cpp
+classes/Controlador.cpp
+classes/Passageiro.cpp
+classes/Trajeto.cpp
+classes/Transporte.cpp
+classes/Viagem.cpp
+
+g++ main.cpp classes/Cidade.cpp classes/Controlador.cpp classes/Passageiro.cpp classes/Trajeto.cpp classes/Transporte.cpp classes/Viagem.cpp -o meu_programa && ./meu_programa

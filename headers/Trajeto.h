@@ -2,14 +2,27 @@
 #define TRAJETO_H
 
 #include <string>
+#include "Cidade.h"
 using namespace std;
 
 class Trajeto {
 private:
-    string nome;
+    Cidade origem;
+    Cidade destino;
+    string tipo;
+    float distancia;
 public:
-    Trajeto(string nome);
-    string getNome();
+    Trajeto(Cidade origem, Cidade destino, string tipo, float distancia);
+    
+    Cidade getOrigem();
+    Cidade getDestino();
+    string getTipo();
+    float getDistancia();
+
+    void setOrigem(Cidade origem);
+    void setDestino(Cidade destino);
+    void setTipo(string tipo);
+    void setDistancia(float distancia);
 };
 
 #endif

@@ -7,3 +7,7 @@ Cidade::Cidade(string nome) {
 string Cidade::getNome() {
     return this->nome;
 }
+
+void Cidade::setNome(string nome) {
+    this->nome = nome;
+}
