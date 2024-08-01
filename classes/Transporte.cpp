@@ -1,9 +1,55 @@
 #include "../headers/Transporte.h"
 
-Transporte::Transporte(string nome) {
+Transporte::Transporte(string nome, char tipo, int capacidade, int velocidade, int distanciaEntreDescanso, int tempoDescanso, Cidade* localAtual) {
     this->nome = nome;
+    this->tipo = tipo;
+    this->capacidade = capacidade;
+    this->velocidade = velocidade;
+    this->distanciaEntreDescanso = distanciaEntreDescanso;
+    this->tempoDescanso = tempoDescanso;
+    this->tempoDescansoAtual = 0;
+    this->localAtual = localAtual;
 }
 
 string Transporte::getNome() {
     return this->nome;
+}
+
+char Transporte::getTipo(){
+    return this->tipo;
+}
+
+int Transporte::getCapacidade(){
+    return this->capacidade;
+}
+
+int Transporte::getVelocidade(){
+    return this->velocidade;
+}
+
+int Transporte::getDistanciaEntreDescanso(){
+    return this->distanciaEntreDescanso;
+}
+
+int Transporte::getTempoDescanso(){
+    return this->tempoDescanso;
+}
+
+int Transporte::getTempoDescansoAtual(){
+    return this->tempoDescansoAtual;
+}
+
+Cidade* Transporte::getLocalAtual(){
+    return this->localAtual;
+}
+
+void Transporte::aumentarTempoDescansoAtual(){
+    this->tempoDescansoAtual = this->tempoDescansoAtual + 1;
+    if (tempoDescansoAtual == tempoDescanso){
+        tempoDescansoAtual = 0;
+    }
+}
+
+void Transporte::setLocalAtual(Cidade* novoLocal){
+    this->localAtual = novoLocal;
 }

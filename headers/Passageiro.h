@@ -2,14 +2,19 @@
 #define PASSAGEIRO_H
 
 #include <string>
+#include "Cidade.h"
 using namespace std;
 
-class Passsageiro {
+class Passageiro {
 private:
     string nome;
+    Cidade* localAtual;
 public:
-    Passsageiro(string nome);
+    Passageiro(string nome, Cidade* localAtual);
     string getNome();
+    Cidade* getLocalAtual();
+
+    void setLocalAtual(Cidade* localAtual);
 };
 
 #endif

@@ -1,9 +1,18 @@
 #include "../headers/Passageiro.h"
 
-Passsageiro::Passsageiro(string nome) {
+Passageiro::Passageiro(string nome, Cidade* localAtual) {
     this->nome = nome;
+    this->localAtual = localAtual;
 }
 
-string Passsageiro::getNome() {
+string Passageiro::getNome() {
     return this->nome;
+}
+
+Cidade* Passageiro::getLocalAtual(){
+    return this->localAtual;
+}
+
+void Passageiro::setLocalAtual(Cidade* localAtual){
+    this->localAtual = localAtual;
 }

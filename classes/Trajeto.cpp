@@ -1,38 +1,37 @@
 #include "../headers/Trajeto.h"
 
 // Construtor
-Trajeto::Trajeto(Cidade origem, Cidade destino, string tipo, float distancia)
-    : origem(origem), destino(destino), tipo(tipo), distancia(distancia) {
-        //this->origem = origem;
-        //this->destino = destino;
-        //this->tipo = tipo;
-        //this->distancia = distancia;
+Trajeto::Trajeto(Cidade* origem, Cidade* destino, char tipo, int distancia){
+    this->origem = origem;
+    this->destino = destino;
+    this->tipo = tipo;
+    this->distancia = distancia;
 }
 
 // Getters
-Cidade Trajeto::getOrigem() {
+Cidade* Trajeto::getOrigem() {
     return this->origem;
 }
-Cidade Trajeto::getDestino() {
+Cidade* Trajeto::getDestino() {
     return this->destino;
 }
-string Trajeto::getTipo() {
+char Trajeto::getTipo() {
     return this->tipo;
 }
-float Trajeto::getDistancia() {
+int Trajeto::getDistancia() {
     return this->distancia;
 }
 
 // Setters
-void Trajeto::setOrigem(Cidade origem) {
+void Trajeto::setOrigem(Cidade* origem) {
     this->origem = origem;
 }
-void Trajeto::setDestino(Cidade destino) {
+void Trajeto::setDestino(Cidade* destino) {
     this->destino = destino;
 }
-void Trajeto::setTipo(string tipo) {
+void Trajeto::setTipo(char tipo) {
     this->tipo = tipo;
 }
-void Trajeto::setDistancia(float distancia) {
+void Trajeto::setDistancia(int distancia) {
     this->distancia = distancia;
 }
