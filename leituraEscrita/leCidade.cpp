@@ -1,4 +1,6 @@
 #include "../headers/Cidade.h"
+#include <fstream>
+#include <iostream>
 
 void salvarCidade(Cidade *cidade){
     ofstream arquivoCidades("memory/cidades.txt", ios::app);

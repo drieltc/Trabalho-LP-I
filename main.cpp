@@ -11,10 +11,17 @@
 
 #include "leituraEscrita/leCidade.cpp"
 #include "leituraEscrita/lePassageiro.cpp"
+#include "leituraEscrita/leTrajeto.cpp"
+#include "leituraEscrita/leTransporte.cpp"
+#include "leituraEscrita/leViagem.cpp"
 
 using namespace std;
 
 vector<Cidade>* cidades = carregarCidades();
+vector<Passageiro>* passageiros = carregarPassageiros(cidades);
+vector<Trajeto>* trajetos = carregarTrajetos();
+vector<Transporte>* transportes = carregarTransportes();
+vector<Viagem>* viagens = carregarViagens();
 
 void cadastrarCidade(string nome){
     //adicionar nova cidade
@@ -35,65 +42,37 @@ void mostrarCidades(){
     }
 }
 
-void salvarPassageiro(Passageiro *passageiro){
-    ofstream arquivoPassageiros("memory/passageiros.txt", ios::app);
-    if (arquivoPassageiros.is_open()){
-        arquivoPassageiros << passageiro->getNome() << "," << passageiro->getLocalAtual()->getNome() << endl;
-        arquivoPassageiros.close();
-    } else {
-        cerr << "Não foi possível abrir o arquivo passageiros.txt para escrita." << endl;
-    }
-}
-
-vector<Passageiro>* carregarPassageiros(){
-    vector<Passageiro>* passageiros = new vector<Passageiro>;
-    ifstream arquivoPassageiros("memory/passageiros.txt");
-
-    if (arquivoPassageiros.is_open()){
-        string linha;
-        while (getline(arquivoPassageiros, linha)){
-            size_t pos = linha.find(",");
-            if (pos != string::npos){
-                string nome = linha.substr(0, pos);
-                string nomeCidade = linha.substr(pos+1);
-
-                Cidade* cidadeEncontrada = new Cidade("");
-                for (auto& cidade: *cidades){
-                    if (cidade.getNome() == nomeCidade){
-                        cidadeEncontrada = &cidade;
-                        break;
-                    }
-                }
-                if (!cidadeEncontrada->getNome().empty()){
-                    passageiros->emplace_back(nome, cidadeEncontrada);
-                } else {
-                    cerr << "Cidade não encontrada: " << nomeCidade << endl;
-                }
-            }
-        }
-        arquivoPassageiros.close();
-    } else {
-        cerr << "Não foi possível abrir o arquivo passageiros.txt para leitura." << endl;
-    }
-    return passageiros;
-}
-
-vector<Passageiro>* passageiros = carregarPassageiros();
-
-int main() {
-    Cidade* localAtual = new Cidade("Cidade Exemplo");
+void cadastrarPassageiro(string nome, string nomeCidade){
+    Cidade* localAtual = new Cidade(nomeCidade);
     Passageiro* novoPassageiro = new Passageiro("João", localAtual);
     salvarPassageiro(novoPassageiro);
+    passageiros = carregarPassageiros(cidades);
+}
 
+void mostrarPassageiros(){
     if (passageiros != nullptr){
         for (auto& passageiro: *passageiros){
-            cout << "Nome: " << passageiro.getNome() << ", Local Atual" << passageiro.getLocalAtual()->getNome();
+            cout << "Nome: " << passageiro.getNome() << ", Local Atual: " << passageiro.getLocalAtual()->getNome() << endl;
         }
     } else {
         cerr << "Erro ao carregar os passageiros." << endl;
     }
+}
+
+void deletarInfos(){
+    for (auto& cidade : *cidades){
+        delete &cidade;
+    }
+
+    for (auto& passageiro : *passageiros){
+        delete &passageiro;
+    }
 
     delete cidades;
     delete passageiros;
+}
+
+int main() {
+    deletarInfos();
     return 0;
 }
