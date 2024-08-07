@@ -1,5 +1,5 @@
-#include "../headers/Passageiro.h"
-#include "../headers/Cidade.h"
+#include "../headers/lePassageiro.h"
+#include "../../headers/Cidade.h"
 #include <fstream>
 #include <iostream>
 #include <vector>
@@ -14,7 +14,7 @@ void salvarPassageiro(Passageiro *passageiro){
     }
 }
 
-vector<Passageiro>* carregarPassageiros(vector<Cidade>* cidades){
+vector<Passageiro>* carregarPassageiros(vector<Cidade>* cidades, std::function<Cidade*(const std::string&)> pesquisarCidade) {
     vector<Passageiro>* passageiros = new vector<Passageiro>;
     ifstream arquivoPassageiros("memory/passageiros.txt");
 
@@ -26,18 +26,10 @@ vector<Passageiro>* carregarPassageiros(vector<Cidade>* cidades){
                 string nome = linha.substr(0, pos);
                 string nomeCidade = linha.substr(pos+1);
 
-                Cidade* cidadeEncontrada = new Cidade("");
-                for (auto& cidade: *cidades){
-                    if (cidade.getNome() == nomeCidade){
-                        cidadeEncontrada = &cidade;
-                        break;
-                    }
-                }
-                if (!cidadeEncontrada->getNome().empty()){
+                Cidade* cidadeEncontrada = pesquisarCidade(nomeCidade); 
+                if (!cidadeEncontrada->getNome().empty() && !nome.empty()){
                     passageiros->emplace_back(nome, cidadeEncontrada);
-                } else {
-                    cerr << "Cidade não encontrada: " << nomeCidade << endl;
-                }
+                } 
             }
         }
         arquivoPassageiros.close();
