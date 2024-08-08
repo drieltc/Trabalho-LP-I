@@ -1,5 +1,3 @@
 João,Natal
-Chico,RS
-Leo,Mossoro
-Zé,Natal
+Zé,Parnamirim
 Caio,Japecanga

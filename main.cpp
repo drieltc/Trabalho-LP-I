@@ -9,52 +9,48 @@
 #include "headers/Transporte.h"
 #include "headers/Viagem.h"
 
-#include "leituraEscrita/headers/leCidade.h"
-#include "leituraEscrita/headers/lePassageiro.h"
-
 using namespace std;
 
-// void mostrarCidades(){
-//     // Verificar se o ponteiro de cidades não é nulo
-//     if (cidades != nullptr) {
-//         for (auto& cidade : *cidades) {
-//             cout << cidade.getNome() << endl;
-//         }
-//         delete cidades;
-//     } else {
-//         cerr << "Erro ao carregar as cidades." << endl;
-//     }
-// }
-
-// void mostrarPassageiros(){
-//     if (passageiros != nullptr){
-//         for (auto& passageiro: *passageiros){
-//             cout << "Nome: " << passageiro.getNome() << ", Local Atual: " << passageiro.getLocalAtual()->getNome() << endl;
-//         }
-//     } else {
-//         cerr << "Erro ao carregar os passageiros." << endl;
-//     }
-// }
-
 void cadastrarCidade(Controlador* control){
+    cout << "Opção Selecionada: CADASTRAR CIDADE\n\n";
+    
     string nomeCidade;
-    cout << "Opção Selecionada: CADASTRAR CIDADE\n";
     cout << "Digite o nome da Cidade: ";
     cin >> nomeCidade;
+    
     control->cadastrarCidade(nomeCidade);
-    cout << "Cidade " << nomeCidade << " cadastrada com sucesso!\n";
+    
+    cout << "Cidade " << nomeCidade << " cadastrada com sucesso!\n\n";
 }
 
 void cadastrarPassageiro(Controlador* control){
+    cout << "Opção Selecionada: CADASTRAR PASSAGEIRO\n\n";
+    
     string nomePassageiro;
-    string nomeCidade;
-    cout << "Opção Selecionada: CADASTRAR PASSAGEIRO\n";
     cout << "Digite o nome do Passageiro: ";
     cin >> nomePassageiro;
+    
+    string nomeCidade;
     cout << "Digite o nome da Cidade em que " << nomePassageiro << " se encontra: ";
     cin >> nomeCidade;
+    
     control->cadastrarPassageiro(nomePassageiro, nomeCidade);
-    cout << "Passageiro " << nomePassageiro << " na cidade " << nomeCidade << " cadastrado com sucesso!";
+    
+    cout << "Passageiro " << nomePassageiro << " na cidade " << nomeCidade << " cadastrado com sucesso!\n\n";
+}
+
+void relatarPassageiros(Controlador* control){
+    cout << "Opção Selecionada: RELATAR PASSAGEIROS\n\n";
+
+    cout << "Nome | Local | Origem | Destino \n";
+    control->relatarPassageiros();
+}
+
+void relatarCidades(Controlador* control){
+    cout << "Opção Selecionada: RELATAR VIAGENS\n\n";
+    cout << "As cidades mais visitadas são:\n";
+
+    control->relatarCidades();
 }
 
 void mostrarMenu(){
@@ -99,7 +95,7 @@ int main() {
                 // Função para gerenciar viagens
                 break;
             case 6:
-                // Função para relatar pessoas
+                relatarPassageiros(control);
                 break;
             case 7:
                 // Função para relatar transportes
@@ -108,7 +104,7 @@ int main() {
                 // Função para relatar viagens
                 break;
             case 9:
-                // Função para ver cidades mais visitadas
+                relatarCidades(control);
                 break;
             case 0:
                 running = false;

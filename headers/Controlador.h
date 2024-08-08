@@ -23,11 +23,12 @@ public:
     void cadastrarCidade(string nome);
     Cidade* pesquisarCidade(string nome);
     void cadastrarPassageiro(string nome, string nomeCidade);
+    void relatarPassageiros();
+    void relatarCidades();
     // void cadastrarTrajetos(string nomeOrigem, string nomeDestino, char tipo, int distancia);
     // void cadastrarTransportes(string nome, char tipo, int capacidade, int velocidade, int distanciaEntreDescanso, int tempoDescanso, string localAtual);
     // void iniciarViagem(string nomeTransporte, vector<string> nomesPassageiros, string nomeOrigem, string nomeDestino);
     // void avancarHoras();
-    // void relatarEstado();
 };
 
 #endif // CCONTROLADOR_H
