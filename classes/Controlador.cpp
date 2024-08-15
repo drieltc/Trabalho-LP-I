@@ -52,6 +52,19 @@ Cidade* Controlador::pesquisarCidade(string nome){
     return nullptr;
 }
 
+void Controlador::relatarCidades(){
+    if (cidades != nullptr){
+        for (auto& cidade : *cidades) {
+            if (cidade.getNome() != "Em_Transito"){
+                cout << "- "<< cidade.getNome() << endl;
+            }
+        }
+    } else {
+        cout << "Erro ao carregar cidades.\n";
+    }
+    cout << endl;
+}
+
 void Controlador::cadastrarPassageiro(string nome, string nomeCidade){
 
     Cidade* localAtual = pesquisarCidade(nomeCidade);
@@ -66,6 +79,27 @@ void Controlador::cadastrarPassageiro(string nome, string nomeCidade){
         passageiros = carregarPassageiros(cidades, pesquisarCidadeLambda);
         cout << "Passageiro " << nome << " na cidade " << nomeCidade << " cadastrado com sucesso!\n\n";
     }
+}
+
+void Controlador::relatarPassageiros(){
+    if (passageiros != nullptr){
+        for (auto& passageiro: *passageiros){
+            string localAtual = passageiro.getLocalAtual()->getNome();
+
+            if (localAtual!= "Em_Transito"){
+                cout << passageiro.getNome() << " | "
+                << localAtual << " | " << endl;
+            } else {
+                cout << passageiro.getNome() << " | "
+                << " Em Trânsito " << " | "
+                << "origem" << " | "
+                << "destino" << endl;
+            }
+        }
+    } else {
+        cout << "Erro ao carregar os passageiros." << endl;
+    }
+    cout << endl;
 }
 
 void Controlador::cadastrarTrajeto(string nomeOrigem, string nomeDestino, char tipo, int distancia){
@@ -104,37 +138,31 @@ void Controlador::cadastrarTransporte(string nome, char tipo, int capacidade, in
     }
 }
 
-void Controlador::relatarPassageiros(){
-    if (passageiros != nullptr){
-        for (auto& passageiro: *passageiros){
-            string localAtual = passageiro.getLocalAtual()->getNome();
+void Controlador::relatarTransportes(){
+    if(transportes != nullptr){
+        for (auto& transporte: *transportes){
+            string localAtual = transporte.getLocalAtual()->getNome();
 
-            if (localAtual!= "Em_Transito"){
-                cout << passageiro.getNome() << " | " << localAtual << " | " << endl;
-            } else {
-                cout << passageiro.getNome() << "Em Trânsito " << "origem" << "destino" << endl;
-            }
-        }
-    } else {
-        cout << "Erro ao carregar os passageiros." << endl;
-    }
-    cout << endl;
-}
+            cout << transporte.getNome() << " | " 
+            << transporte.getTipo() << " | "
+            << transporte.getCapacidade() << " | "
+            << transporte.getVelocidade() << " | "
+            << transporte.getLocalAtual()->getNome() << " | "
+            << transporte.getDistanciaEntreDescansos() << " | "
+            << transporte.getTempoDescanso() << " | "
+            << transporte.getTempoDescansoAtual() << endl;
 
-void Controlador::relatarCidades(){
-    if (cidades != nullptr){
-        for (auto& cidade : *cidades) {
-            if (cidade.getNome() != "Em_Transito"){
-                cout << "- "<< cidade.getNome() << endl;
-            }
         }
-    } else {
-        cout << "Erro ao carregar cidades.\n";
     }
     cout << endl;
 }
 
 Controlador::~Controlador(){
+    for (auto& cidade : *cidades) delete &cidade;
+    for (auto& trajeto : *trajetos) delete &trajeto;
+    for (auto& transporte : *transportes) delete &transporte;
+    for (auto& passageiro : *passageiros) delete &passageiro;
+    //for (auto& viagem : viagens) delete viagem;
     delete cidades;
     delete passageiros;
     delete trajetos;

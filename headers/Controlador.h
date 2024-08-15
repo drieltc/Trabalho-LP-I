@@ -22,11 +22,12 @@ public:
     ~Controlador();
     void cadastrarCidade(string nome);
     Cidade* pesquisarCidade(string nome);
+    void relatarCidades();
     void cadastrarPassageiro(string nome, string nomeCidade);
     void relatarPassageiros();
-    void relatarCidades();
     void cadastrarTrajeto(string nomeOrigem, string nomeDestino, char tipo, int distancia);
     void cadastrarTransporte(string nome, char tipo, int capacidade, int velocidade,  string nomeLocalAtual, int distanciaEntreDescansos, int tempoDescanso);
+    void relatarTransportes();
     // void iniciarViagem(string nomeTransporte, vector<string> nomesPassageiros, string nomeOrigem, string nomeDestino);
     // void avancarHoras();
 };

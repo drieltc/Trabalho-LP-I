@@ -21,7 +21,7 @@ private:
     char getTipo();
     int getCapacidade();
     int getVelocidade();
-    int getDistanciaEntreDescanso();
+    int getDistanciaEntreDescansos();
     int getTempoDescanso();
     int getTempoDescansoAtual();
     Cidade* getLocalAtual();

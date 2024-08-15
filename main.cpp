@@ -104,6 +104,13 @@ void relatarPassageiros(Controlador* control){
     control->relatarPassageiros();
 }
 
+void relatarTransportes(Controlador* control){
+    cout << "Ooção Selecionada: RELATAR TRANSPORTES\n\n";
+
+    cout << "Nome | Tipo | Capacidade | Velocidade (km/h) | Local Atual | Distância Entre Descansos (km) | Tempo de Descanso (h) | Tempo de Descanso Atual (h)\n";
+    control->relatarTransportes();
+}
+
 void relatarCidades(Controlador* control){
     cout << "Opção Selecionada: RELATAR VIAGENS\n\n";
     cout << "As cidades mais visitadas são:\n";
@@ -156,7 +163,7 @@ int main() {
                 relatarPassageiros(control);
                 break;
             case 7:
-                // Função para relatar transportes
+                relatarTransportes(control);
                 break;
             case 8:
                 // Função para relatar viagens

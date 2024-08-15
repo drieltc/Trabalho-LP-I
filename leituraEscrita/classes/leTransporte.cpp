@@ -7,7 +7,7 @@
 void salvarTransporte(Transporte *transporte){
     ofstream arquivoTransporte("memory/transportes.txt", ios::app);
     if (arquivoTransporte.is_open()){
-        arquivoTransporte << transporte->getNome() << "," << transporte->getTipo() << "," << transporte->getCapacidade() << "," << transporte->getVelocidade() << "," << transporte->getLocalAtual()->getNome() << "," << transporte->getDistanciaEntreDescanso() << "," << transporte->getTempoDescanso() << "," << transporte->getTempoDescansoAtual() << endl;
+        arquivoTransporte << transporte->getNome() << "," << transporte->getTipo() << "," << transporte->getCapacidade() << "," << transporte->getVelocidade() << "," << transporte->getLocalAtual()->getNome() << "," << transporte->getDistanciaEntreDescansos() << "," << transporte->getTempoDescanso() << "," << transporte->getTempoDescansoAtual() << endl;
         arquivoTransporte.close();
     } else {
         cerr << "Não foi possível abrir o arquivo transportes.txt para escrita.\n";

@@ -27,7 +27,7 @@ int Transporte::getVelocidade(){
     return this->velocidade;
 }
 
-int Transporte::getDistanciaEntreDescanso(){
+int Transporte::getDistanciaEntreDescansos(){
     return this->distanciaEntreDescanso;
 }
 
