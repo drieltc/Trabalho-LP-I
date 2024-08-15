@@ -49,6 +49,7 @@ void cadastrarTrajeto(Controlador* control){
     char tipo;
     cout << "Digite o tipo de Trajeto [A/T]: ";
     cin >> tipo;
+    tipo = toupper(tipo);
 
     int distancia;
     cout << "Digite a distância entre " << cidadeOrigem << " e " << cidadeDestino << " (km): ";
@@ -67,6 +68,7 @@ void cadastrarTransporte(Controlador* control){
     char tipo;
     cout << "Digite o tipo do Transporte [A/T]: ";
     cin >> tipo;
+    tipo = toupper(tipo);
 
     int capacidade;
     cout << "Digite a capacidade do Transporte: ";
@@ -92,7 +94,7 @@ void cadastrarTransporte(Controlador* control){
     cout << "Digite o nome da Cidade em que o Transporte se encontra: ";
     cin >> nomeLocalAtual;
 
-    control->cadastrarTransporte(nome, tipo, capacidade, velocidade, distanciaEntreDescansos, tempoDescanso, nomeLocalAtual);
+    control->cadastrarTransporte(nome, tipo, capacidade, velocidade, nomeLocalAtual, distanciaEntreDescansos, tempoDescanso);
 }
 
 void relatarPassageiros(Controlador* control){

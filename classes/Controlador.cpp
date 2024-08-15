@@ -3,6 +3,7 @@
 #include "../leituraEscrita/headers/leCidade.h"
 #include "../leituraEscrita/headers/lePassageiro.h"
 #include "../leituraEscrita/headers/leTrajeto.h"
+#include "../leituraEscrita/headers/leTransporte.h"
 
 Controlador::Controlador(){
     cidades = carregarCidades();
@@ -13,6 +14,7 @@ Controlador::Controlador(){
 
     passageiros = carregarPassageiros(cidades, pesquisarCidadeLambda);
     trajetos = carregarTrajetos(cidades, pesquisarCidadeLambda);
+    transportes = carregarTransportes(cidades, pesquisarCidadeLambda);
 }
 
 void Controlador::cadastrarCidade(string nome){
@@ -85,6 +87,23 @@ void Controlador::cadastrarTrajeto(string nomeOrigem, string nomeDestino, char t
     }
 }
 
+void Controlador::cadastrarTransporte(string nome, char tipo, int capacidade, int velocidade, string nomeLocalAtual, int distanciaEntreDescansos, int tempoDescanso){
+   
+    Cidade* cidadeLocalAtual = pesquisarCidade(nomeLocalAtual);
+
+    if (cidadeLocalAtual != nullptr){
+        Transporte* novoTransporte = new Transporte(nome, tipo, capacidade, velocidade, cidadeLocalAtual, distanciaEntreDescansos, tempoDescanso);
+        salvarTransporte(novoTransporte);
+
+       auto pesquisarCidadeLambda = [this](const string& nomeCidade) -> Cidade* {
+            return this->pesquisarCidade(nomeCidade);
+        };
+
+        transportes = carregarTransportes(cidades, pesquisarCidadeLambda);
+        cout << "Transporte " << nome << " cadastrado com suceso!\n\n";
+    }
+}
+
 void Controlador::relatarPassageiros(){
     if (passageiros != nullptr){
         for (auto& passageiro: *passageiros){
@@ -118,18 +137,9 @@ void Controlador::relatarCidades(){
 Controlador::~Controlador(){
     delete cidades;
     delete passageiros;
+    delete trajetos;
+    delete transportes;
 }
-
-// void Controlador::cadastrarTrajetos(string nomeOrigem, string nomeDestino, char tipo, int distancia){
-//     //criar uma funcao que acesse o vetor de cidades cadastradas, use o metodo getNome() e se getNome() == nome, retornar a cidade (origem)
-//     //fazer o mesmo para destino
-//     //criar o trajeto
-// }
-
-// void cadastrarTransportes(string nome, char tipo, int capacidade, int velocidade, int distanciaEntreDescanso, int tempoDescanso, string localAtual){
-//     //criar uma funcao que acesse o vetor de cidades cadastradas, use o metodo getNome() e se getNome() == nome, retornar a cidade (localAtual)
-//     //criar o transpote
-// }
 
 // void iniciarViagem(string nomeTransporte, vector<string> nomesPassageiros, string nomeOrigem, string nomeDestino){
 //     //criar uma funcao que acesse o vetor de transportes, use o getNome() e retorne o nome do transporte

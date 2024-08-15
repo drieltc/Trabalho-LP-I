@@ -26,7 +26,7 @@ public:
     void relatarPassageiros();
     void relatarCidades();
     void cadastrarTrajeto(string nomeOrigem, string nomeDestino, char tipo, int distancia);
-    void cadastrarTransporte(string nome, char tipo, int capacidade, int velocidade, int distanciaEntreDescansos, int tempoDescanso, string localAtual);
+    void cadastrarTransporte(string nome, char tipo, int capacidade, int velocidade,  string nomeLocalAtual, int distanciaEntreDescansos, int tempoDescanso);
     // void iniciarViagem(string nomeTransporte, vector<string> nomesPassageiros, string nomeOrigem, string nomeDestino);
     // void avancarHoras();
 };

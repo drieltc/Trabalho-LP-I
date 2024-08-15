@@ -16,7 +16,7 @@ private:
     int tempoDescansoAtual; //em horas
     Cidade* localAtual;
     public:
-    Transporte(string nome, char tipo, int capacidade, int velocidade, int distanciaEntreDescanso, int tempoDescanso, Cidade* localAtual);
+    Transporte(string nome, char tipo, int capacidade, int velocidade,  Cidade* localAtual, int distanciaEntreDescanso, int tempoDescanso, int tempoDescansoAtual=0);
     string getNome();
     char getTipo();
     int getCapacidade();
