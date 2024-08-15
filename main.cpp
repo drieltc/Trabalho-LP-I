@@ -39,11 +39,11 @@ void cadastrarTrajeto(Controlador* control){
     cout << "Opção Selecionada: CADASTRAR TRAJETO\n\n";
 
     string cidadeOrigem;
-    cout << "Digite o nome da cidade de Origem do Trajeto: ";
+    cout << "Digite o nome da cidade de origem do Trajeto: ";
     cin >> cidadeOrigem;
 
     string cidadeDestino;
-    cout << "Digite o nome da cidade de Destino do Trajeto: ";
+    cout << "Digite o nome da cidade de destino do Trajeto: ";
     cin >> cidadeDestino;
 
     char tipo;
@@ -51,10 +51,48 @@ void cadastrarTrajeto(Controlador* control){
     cin >> tipo;
 
     int distancia;
-    cout << "Digite a distância entre " << cidadeOrigem << " e " << cidadeDestino << " : ";
+    cout << "Digite a distância entre " << cidadeOrigem << " e " << cidadeDestino << " (km): ";
     cin >> distancia;
 
     control->cadastrarTrajeto(cidadeOrigem, cidadeDestino, tipo, distancia);
+}
+
+void cadastrarTransporte(Controlador* control){
+    cout << "Opção Selecionada: CADASTRAR TRANSPORTE\n\n";
+
+    string nome;
+    cout << "Digite o nome do Transporte: ";
+    cin >> nome;
+
+    char tipo;
+    cout << "Digite o tipo do Transporte [A/T]: ";
+    cin >> tipo;
+
+    int capacidade;
+    cout << "Digite a capacidade do Transporte: ";
+    cin >> capacidade;
+
+    int velocidade;
+    cout << "Digite a velocidade do Transporte (km/h): ";
+    cin >> velocidade;
+
+    int distanciaEntreDescansos;
+    cout << "Digite a distância entre descansos do Transporte (km): ";
+    cin >> distanciaEntreDescansos;
+
+    int tempoDescanso;
+    if (distanciaEntreDescansos > 0){
+        cout << "Digite o tempo de descanso necessário (h): ";
+        cin >> tempoDescanso;
+    } else {
+        tempoDescanso=0;
+    }
+
+    string nomeLocalAtual;
+    cout << "Digite o nome da Cidade em que o Transporte se encontra: ";
+    cin >> nomeLocalAtual;
+
+    control->cadastrarTransporte(nome, tipo, capacidade, velocidade, distanciaEntreDescansos, tempoDescanso, nomeLocalAtual);
 }
 
 void relatarPassageiros(Controlador* control){
@@ -107,7 +145,7 @@ int main() {
                 cadastrarTrajeto(control);
                 break;
             case 4:
-                // Função para cadastrar novo transporte
+                cadastrarTransporte(control);
                 break;
             case 5:
                 // Função para gerenciar viagens

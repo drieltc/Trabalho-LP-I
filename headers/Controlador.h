@@ -6,7 +6,7 @@
 #include "Cidade.h"
 #include "Passageiro.h"
 #include "Trajeto.h"
-// #include "Transporte.h"
+#include "Transporte.h"
 // #include "Viagem.h"
 using namespace std;
 
@@ -15,7 +15,7 @@ private:
     vector<Cidade>* cidades;
     vector<Passageiro>* passageiros;
     vector<Trajeto>* trajetos;
-    // vector<Transporte>* transportes;
+    vector<Transporte>* transportes;
     // vector<Viagem>* viagens;
 public:
     Controlador();
@@ -26,7 +26,7 @@ public:
     void relatarPassageiros();
     void relatarCidades();
     void cadastrarTrajeto(string nomeOrigem, string nomeDestino, char tipo, int distancia);
-    // void cadastrarTransportes(string nome, char tipo, int capacidade, int velocidade, int distanciaEntreDescanso, int tempoDescanso, string localAtual);
+    void cadastrarTransporte(string nome, char tipo, int capacidade, int velocidade, int distanciaEntreDescansos, int tempoDescanso, string localAtual);
     // void iniciarViagem(string nomeTransporte, vector<string> nomesPassageiros, string nomeOrigem, string nomeDestino);
     // void avancarHoras();
 };
