@@ -4,6 +4,8 @@
 #include <iostream>
 #include <vector>
 
+using namespace std;
+
 void salvarPassageiro(Passageiro *passageiro){
     ofstream arquivoPassageiros("memory/passageiros.txt", ios::app);
     if (arquivoPassageiros.is_open()){
@@ -14,7 +16,7 @@ void salvarPassageiro(Passageiro *passageiro){
     }
 }
 
-vector<Passageiro>* carregarPassageiros(vector<Cidade>* cidades, std::function<Cidade*(const std::string&)> pesquisarCidade) {
+vector<Passageiro>* carregarPassageiros(vector<Cidade>* cidades, function<Cidade*(const string&)> pesquisarCidade) {
     vector<Passageiro>* passageiros = new vector<Passageiro>;
     ifstream arquivoPassageiros("memory/passageiros.txt");
 

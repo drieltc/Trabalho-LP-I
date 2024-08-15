@@ -19,8 +19,6 @@ void cadastrarCidade(Controlador* control){
     cin >> nomeCidade;
     
     control->cadastrarCidade(nomeCidade);
-    
-    cout << "Cidade " << nomeCidade << " cadastrada com sucesso!\n\n";
 }
 
 void cadastrarPassageiro(Controlador* control){
@@ -29,14 +27,34 @@ void cadastrarPassageiro(Controlador* control){
     string nomePassageiro;
     cout << "Digite o nome do Passageiro: ";
     cin >> nomePassageiro;
-    
+     
     string nomeCidade;
     cout << "Digite o nome da Cidade em que " << nomePassageiro << " se encontra: ";
     cin >> nomeCidade;
     
     control->cadastrarPassageiro(nomePassageiro, nomeCidade);
-    
-    cout << "Passageiro " << nomePassageiro << " na cidade " << nomeCidade << " cadastrado com sucesso!\n\n";
+}
+
+void cadastrarTrajeto(Controlador* control){
+    cout << "Opção Selecionada: CADASTRAR TRAJETO\n\n";
+
+    string cidadeOrigem;
+    cout << "Digite o nome da cidade de Origem do Trajeto: ";
+    cin >> cidadeOrigem;
+
+    string cidadeDestino;
+    cout << "Digite o nome da cidade de Destino do Trajeto: ";
+    cin >> cidadeDestino;
+
+    char tipo;
+    cout << "Digite o tipo de Trajeto [A/T]: ";
+    cin >> tipo;
+
+    int distancia;
+    cout << "Digite a distância entre " << cidadeOrigem << " e " << cidadeDestino << " : ";
+    cin >> distancia;
+
+    control->cadastrarTrajeto(cidadeOrigem, cidadeDestino, tipo, distancia);
 }
 
 void relatarPassageiros(Controlador* control){
@@ -86,7 +104,7 @@ int main() {
                 cadastrarPassageiro(control);
                 break;
             case 3:
-                // Função para cadastrar novo traejto
+                cadastrarTrajeto(control);
                 break;
             case 4:
                 // Função para cadastrar novo transporte

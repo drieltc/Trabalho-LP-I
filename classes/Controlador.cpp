@@ -2,6 +2,7 @@
 #include "../headers/Controlador.h"
 #include "../leituraEscrita/headers/leCidade.h"
 #include "../leituraEscrita/headers/lePassageiro.h"
+#include "../leituraEscrita/headers/leTrajeto.h"
 
 Controlador::Controlador(){
     cidades = carregarCidades();
@@ -11,12 +12,32 @@ Controlador::Controlador(){
     };
 
     passageiros = carregarPassageiros(cidades, pesquisarCidadeLambda);
+    trajetos = carregarTrajetos(cidades, pesquisarCidadeLambda);
 }
 
 void Controlador::cadastrarCidade(string nome){
+
+    if (nome.empty()){
+        cout << "Valor inválido\n";
+        return;
+    }
+
+    for (auto& cidade: *cidades){
+        if (cidade.getNome() == nome){
+            cout << "A cidade " << nome << " já está cadastrada\n\n";
+            return;
+        }
+    }
+
+    if (nome == "0"){
+        cout << "Voltando\n\n";
+        return;
+    } 
+
     Cidade* novaCidade = new Cidade(nome);
     salvarCidade(novaCidade);
     cidades = carregarCidades();
+    cout << "Cidade " << nome << " cadastrada com sucesso!\n\n";
 }
 
 Cidade* Controlador::pesquisarCidade(string nome){
@@ -30,16 +51,37 @@ Cidade* Controlador::pesquisarCidade(string nome){
 }
 
 void Controlador::cadastrarPassageiro(string nome, string nomeCidade){
+
     Cidade* localAtual = pesquisarCidade(nomeCidade);
     if (localAtual != nullptr){
         Passageiro* novoPassageiro = new Passageiro(nome, localAtual);
         salvarPassageiro(novoPassageiro);
-        
-        auto pesquisarCidadeLambda = [this](const string& nome) -> Cidade* {
-            return this->pesquisarCidade(nome);
+
+        auto pesquisarCidadeLambda = [this](const string& nomeCidade) -> Cidade* {
+            return this->pesquisarCidade(nomeCidade);
         };
     
         passageiros = carregarPassageiros(cidades, pesquisarCidadeLambda);
+        cout << "Passageiro " << nome << " na cidade " << nomeCidade << " cadastrado com sucesso!\n\n";
+    }
+}
+
+void Controlador::cadastrarTrajeto(string nomeOrigem, string nomeDestino, char tipo, int distancia){
+
+    Cidade* cidadeOrigem = pesquisarCidade(nomeOrigem);
+    Cidade* cidadeDestino = pesquisarCidade(nomeDestino);
+
+    if (cidadeDestino != nullptr && cidadeOrigem != nullptr){
+        Trajeto* novoTrajeto = new Trajeto(cidadeOrigem, cidadeDestino, tipo, distancia);
+        salvarTrajeto(novoTrajeto);
+
+        auto pesquisarCidadeLambda = [this](const string& nomeCidade) -> Cidade* {
+            return this->pesquisarCidade(nomeCidade);
+        };
+
+        trajetos = carregarTrajetos(cidades, pesquisarCidadeLambda);
+        cout << "Trajeto de " << nomeOrigem << " para " << nomeDestino << " cadastrado com sucesso!\n\n";
+
     }
 }
 
