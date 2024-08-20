@@ -7,3 +7,11 @@ Cidade::Cidade(string nome) {
 string Cidade::getNome() {
     return this->nome;
 }
+
+int Cidade::getVisitantes(){
+    return this->visitantes;
+}
+
+void Cidade::addVisitantes(int n){
+    this->visitantes = this->getVisitantes() + n;
+}
