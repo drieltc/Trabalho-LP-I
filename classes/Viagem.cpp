@@ -2,25 +2,25 @@
 #include <iostream>
 using namespace std;
 
-Viagem::Viagem(Transporte* transporte, vector<Passageiro*> passageiros, Cidade* origem, Cidade* destino){
+Viagem::Viagem(Transporte* transporte, vector<Passageiro*> passageiros, Cidade* origem, Cidade* destino, int horasEmTransito, int distanciaPercorrida, bool emAndamento){
     this->transporte = transporte;
     this->passageiros = passageiros;
     this->origem = origem;
     this->destino = destino;
-    this->horasEmTransito = 0;
-    this->distanciaPercorrida = 0;
-    this->emAndamento = false;
+    this->horasEmTransito = horasEmTransito;
+    this->distanciaPercorrida = distanciaPercorrida;
+    this->emAndamento = emAndamento;
 }
 
-Viagem::Viagem(Transporte* transporte, vector<Passageiro*> passageiros, Cidade* origem, Cidade* destino, Viagem* proxima){
+Viagem::Viagem(Transporte* transporte, vector<Passageiro*> passageiros, Cidade* origem, Cidade* destino, int horasEmTransito, int distanciaPercorrida, bool emAndamento, Viagem* proxima){
     this->transporte = transporte;
     this->passageiros = passageiros;
     this->origem = origem;
     this->destino = destino;
+    this->horasEmTransito = horasEmTransito;
+    this->distanciaPercorrida = distanciaPercorrida;
+    this->emAndamento = emAndamento;
     this->proxima = proxima;
-    this->horasEmTransito = 0;
-    this->distanciaPercorrida = 0;
-    this->emAndamento = false;
 }
 
 bool Viagem::isEmAndamento(){

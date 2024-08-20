@@ -19,9 +19,9 @@ private:
     int distanciaPercorrida;
     bool emAndamento;
 public:
-    Viagem(Transporte* transporte, vector<Passageiro*> passageiros, Cidade* origem, Cidade* destino);
+    Viagem(Transporte* transporte, vector<Passageiro*> passageiros, Cidade* origem, Cidade* destino, int horasEmTransito, int distanciaPercorrida, bool emAndamento);
 
-    Viagem(Transporte* transporte, vector<Passageiro*> passageiros, Cidade* origem, Cidade* destino, Viagem* proxima);
+    Viagem(Transporte* transporte, vector<Passageiro*> passageiros, Cidade* origem, Cidade* destino, int horasEmTransito, int distanciaPercorrida, bool emAndamento, Viagem* proxima);
 
     bool isEmAndamento();
     int getHorasEmTransito();
