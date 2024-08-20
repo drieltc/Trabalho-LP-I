@@ -9,15 +9,15 @@ class Trajeto {
 private:
     Cidade* origem;
     Cidade* destino;
-    char tipo; //'A' para aquatico, 'T' para terrestre
+    char tipo; //'A' para aquático, 'T' para terrestre
     int distancia;
 public:
     Trajeto(Cidade* origem, Cidade* destino, char tipo, int distancia);
     
-    Cidade* getOrigem();
-    Cidade* getDestino();
-    char getTipo();
-    int getDistancia();
+    Cidade* getOrigem() const;
+    Cidade* getDestino() const;
+    char getTipo() const;
+    int getDistancia() const;
 
     void setOrigem(Cidade* origem);
     void setDestino(Cidade* destino);

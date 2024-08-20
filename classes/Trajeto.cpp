@@ -1,7 +1,7 @@
 #include "../headers/Trajeto.h"
 
 // Construtor
-Trajeto::Trajeto(Cidade* origem, Cidade* destino, char tipo, int distancia){
+Trajeto::Trajeto(Cidade* origem, Cidade* destino, char tipo, int distancia) {
     this->origem = origem;
     this->destino = destino;
     this->tipo = tipo;
@@ -9,16 +9,19 @@ Trajeto::Trajeto(Cidade* origem, Cidade* destino, char tipo, int distancia){
 }
 
 // Getters
-Cidade* Trajeto::getOrigem() {
+Cidade* Trajeto::getOrigem() const {
     return this->origem;
 }
-Cidade* Trajeto::getDestino() {
+
+Cidade* Trajeto::getDestino() const {
     return this->destino;
 }
-char Trajeto::getTipo() {
+
+char Trajeto::getTipo() const {
     return this->tipo;
 }
-int Trajeto::getDistancia() {
+
+int Trajeto::getDistancia() const {
     return this->distancia;
 }
 
@@ -26,12 +29,15 @@ int Trajeto::getDistancia() {
 void Trajeto::setOrigem(Cidade* origem) {
     this->origem = origem;
 }
+
 void Trajeto::setDestino(Cidade* destino) {
     this->destino = destino;
 }
+
 void Trajeto::setTipo(char tipo) {
     this->tipo = tipo;
 }
+
 void Trajeto::setDistancia(int distancia) {
     this->distancia = distancia;
 }
