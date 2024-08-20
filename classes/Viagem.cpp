@@ -8,6 +8,7 @@ Viagem::Viagem(Transporte* transporte, vector<Passageiro*> passageiros, Cidade* 
     this->origem = origem;
     this->destino = destino;
     this->horasEmTransito = 0;
+    this->distanciaPercorrida = 0;
     this->emAndamento = false;
 }
 
@@ -18,6 +19,7 @@ Viagem::Viagem(Transporte* transporte, vector<Passageiro*> passageiros, Cidade* 
     this->destino = destino;
     this->proxima = proxima;
     this->horasEmTransito = 0;
+    this->distanciaPercorrida = 0;
     this->emAndamento = false;
 }
 
@@ -29,8 +31,34 @@ int Viagem::getHorasEmTransito(){
     return this->horasEmTransito;
 }
 
-void Viagem::iniciarViagem(){
+Transporte* Viagem::getTransporte(){
+    return this->transporte;
+}
+
+vector<Passageiro*> Viagem::getPassageiros(){
+    return this->passageiros;
+}
+
+Cidade* Viagem::getOrigem(){
+    return this->origem;
+}
+
+Cidade* Viagem::getDestino(){
+    return this->destino;
+}
+
+Viagem* Viagem::getProxima(){
+    return this->proxima;
+}
+
+void Viagem::iniciarViagem(Cidade* emTransito){
     this->emAndamento = true;
+    
+    for (auto& passageiro : passageiros){
+        passageiro->setLocalAtual(emTransito);
+    }
+
+    transporte->setLocalAtual(emTransito);
 }
 
 void Viagem::finalizarViagem(){
