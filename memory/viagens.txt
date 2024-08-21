@@ -1,0 +1,3 @@
+Caminhão,3,Adriel,João,Eduardo,Natal,Macaíba,0
+Carro_Terrestre,1,Zé,Parnamirim,Natal,0
+Carro_Terrestre,1,Zé,Natal,Currais_Novos,0x644d5f54e120

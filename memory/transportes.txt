@@ -1,1 +1,5 @@
-Jumentinho,t,3,5,Natal,20,1,0
+Jumentinho,T,3,5,Currais_Novos,20,1,0
+Carro_Terrestre,T,4,80,Parnamirim,0,2,0
+Barco_Aquatico,A,10,30,Fortaleza,0,4,0
+Avião,A,100,500,Fortaleza,0,1,0
+Caminhão,T,6,60,Natal,0,3,0
