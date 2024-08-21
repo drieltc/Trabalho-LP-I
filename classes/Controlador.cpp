@@ -203,11 +203,12 @@ Controlador::~Controlador(){
     for (auto& trajeto : *trajetos) delete &trajeto;
     for (auto& transporte : *transportes) delete &transporte;
     for (auto& passageiro : *passageiros) delete &passageiro;
-    //for (auto& viagem : viagens) delete viagem;
+    for (auto& viagem : *viagens) delete &viagem;
     delete cidades;
     delete passageiros;
     delete trajetos;
     delete transportes;
+    delete viagens;
 }
 
 void Controlador::iniciarViagem(string nomeTransporte, vector<string> nomesPassageiros, string nomeOrigem, string nomeDestino) {
@@ -269,7 +270,6 @@ void Controlador::iniciarViagem(string nomeTransporte, vector<string> nomesPassa
     cout << "Viagem iniciada com sucesso!" << endl;
     //salvar as mudancas de cidade de pessoas e transportes
     //quando o programa voltar, nao necessariamente o endereco de memoria da proxima viagem será o mesmo
-    //criar gitignore com os objetos
 }
 
 // void avancarHoras(){
