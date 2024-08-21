@@ -31,6 +31,10 @@ int Viagem::getHorasEmTransito(){
     return this->horasEmTransito;
 }
 
+int Viagem::getDistanciaPercorrida(){
+    return this->distanciaPercorrida;
+}
+
 Transporte* Viagem::getTransporte(){
     return this->transporte;
 }

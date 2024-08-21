@@ -25,6 +25,7 @@ public:
 
     bool isEmAndamento();
     int getHorasEmTransito();
+    int getDistanciaPercorrida();
 
     Transporte* getTransporte();
     vector<Passageiro*> getPassageiros();
