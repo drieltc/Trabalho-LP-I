@@ -6,6 +6,7 @@
 #include "Cidade.h"
 #include "Passageiro.h"
 #include "Transporte.h"
+#include "Trajeto.h"
 using namespace std;
 
 class Viagem {
@@ -13,24 +14,25 @@ private:
     Transporte* transporte;
     vector<Passageiro*> passageiros;
     Cidade* origem;
-    Cidade* destino;
+    Trajeto* trajeto;
     Viagem* proxima;
     int horasEmTransito;
     int distanciaPercorrida;
     bool emAndamento;
+    bool hasProxima;
 public:
-    Viagem(Transporte* transporte, vector<Passageiro*> passageiros, Cidade* origem, Cidade* destino, int horasEmTransito, int distanciaPercorrida, bool emAndamento);
+    Viagem(Transporte* transporte, vector<Passageiro*> passageiros, Trajeto* trajeto, int horasEmTransito, int distanciaPercorrida, bool emAndamento, bool hasProxima);
 
-    Viagem(Transporte* transporte, vector<Passageiro*> passageiros, Cidade* origem, Cidade* destino, int horasEmTransito, int distanciaPercorrida, bool emAndamento, Viagem* proxima);
+    Viagem(Transporte* transporte, vector<Passageiro*> passageiros, Trajeto* trajeto, int horasEmTransito, int distanciaPercorrida, bool emAndamento, bool hasProxima, Viagem* proxima);
 
     bool isEmAndamento();
+    bool getHasProxima();
     int getHorasEmTransito();
     int getDistanciaPercorrida();
 
     Transporte* getTransporte();
     vector<Passageiro*> getPassageiros();
-    Cidade* getOrigem();
-    Cidade* getDestino();
+    Trajeto* getTrajeto();
     Viagem* getProxima();
 
     void iniciarViagem(Cidade* emTransito);

@@ -2,29 +2,33 @@
 #include <iostream>
 using namespace std;
 
-Viagem::Viagem(Transporte* transporte, vector<Passageiro*> passageiros, Cidade* origem, Cidade* destino, int horasEmTransito, int distanciaPercorrida, bool emAndamento){
+Viagem::Viagem(Transporte* transporte, vector<Passageiro*> passageiros, Trajeto* trajeto, int horasEmTransito, int distanciaPercorrida, bool emAndamento, bool hasProxima){
     this->transporte = transporte;
     this->passageiros = passageiros;
-    this->origem = origem;
-    this->destino = destino;
+    this->trajeto = trajeto;
     this->horasEmTransito = horasEmTransito;
     this->distanciaPercorrida = distanciaPercorrida;
     this->emAndamento = emAndamento;
+    this->hasProxima = hasProxima;
 }
 
-Viagem::Viagem(Transporte* transporte, vector<Passageiro*> passageiros, Cidade* origem, Cidade* destino, int horasEmTransito, int distanciaPercorrida, bool emAndamento, Viagem* proxima){
+Viagem::Viagem(Transporte* transporte, vector<Passageiro*> passageiros, Trajeto* trajeto, int horasEmTransito, int distanciaPercorrida, bool emAndamento, bool hasProxima, Viagem* proxima){
     this->transporte = transporte;
     this->passageiros = passageiros;
-    this->origem = origem;
-    this->destino = destino;
+    this->trajeto = trajeto;
     this->horasEmTransito = horasEmTransito;
     this->distanciaPercorrida = distanciaPercorrida;
     this->emAndamento = emAndamento;
+    this->hasProxima = hasProxima;
     this->proxima = proxima;
 }
 
 bool Viagem::isEmAndamento(){
     return this->emAndamento;
+}
+
+bool Viagem::getHasProxima(){
+    return this->hasProxima;
 }
 
 int Viagem::getHorasEmTransito(){
@@ -43,14 +47,9 @@ vector<Passageiro*> Viagem::getPassageiros(){
     return this->passageiros;
 }
 
-Cidade* Viagem::getOrigem(){
-    return this->origem;
+Trajeto* Viagem::getTrajeto(){
+    return this->trajeto;
 }
-
-Cidade* Viagem::getDestino(){
-    return this->destino;
-}
-
 Viagem* Viagem::getProxima(){
     return this->proxima;
 }
