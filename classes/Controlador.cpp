@@ -4,6 +4,9 @@
 #include "../leituraEscrita/headers/lePassageiro.h"
 #include "../leituraEscrita/headers/leTrajeto.h"
 #include "../leituraEscrita/headers/leTransporte.h"
+#include "../leituraEscrita/headers/leViagem.h"
+
+#include "../headers/Rota.h"
 
 Controlador::Controlador(){
     cidades = carregarCidades();
@@ -18,7 +21,6 @@ Controlador::Controlador(){
 }
 
 void Controlador::cadastrarCidade(string nome){
-
     if (nome.empty()){
         cout << "Valor inválido\n";
         return;
@@ -43,11 +45,17 @@ void Controlador::cadastrarCidade(string nome){
 }
 
 Cidade* Controlador::pesquisarCidade(string nome){
+    if (cidades == nullptr){
+        cout << "Erro: Nenhuma cidade carregada.\n";
+        return nullptr;
+    }
+
     for (auto& cidade: *cidades){
         if (cidade.getNome() == nome && cidade.getNome() != "Em_Transito"){
             return &cidade;
         }
     }
+
     cout << "Cidade "<< nome <<" não Encontrada." << endl;
     return nullptr;
 }
@@ -62,12 +70,13 @@ void Controlador::relatarCidades(){
     } else {
         cout << "Erro ao carregar cidades.\n";
     }
+
     cout << endl;
 }
 
 void Controlador::cadastrarPassageiro(string nome, string nomeCidade){
-
     Cidade* localAtual = pesquisarCidade(nomeCidade);
+
     if (localAtual != nullptr){
         Passageiro* novoPassageiro = new Passageiro(nome, localAtual);
         salvarPassageiro(novoPassageiro);
@@ -79,6 +88,22 @@ void Controlador::cadastrarPassageiro(string nome, string nomeCidade){
         passageiros = carregarPassageiros(cidades, pesquisarCidadeLambda);
         cout << "Passageiro " << nome << " na cidade " << nomeCidade << " cadastrado com sucesso!\n\n";
     }
+}
+
+Passageiro* Controlador::pesquisarPassageiro(string nome){
+    if (passageiros == nullptr){
+        cout << "Erro: Nenhum passageiro carregado.\n";
+        return nullptr;
+    }
+
+    for (auto& passageiro: *passageiros){
+        if (passageiro.getNome() == nome){
+            return &passageiro;
+        }
+    }
+
+    cout << "Passageiro " << nome << " não encontrado\n";
+    return nullptr;
 }
 
 void Controlador::relatarPassageiros(){
@@ -138,6 +163,22 @@ void Controlador::cadastrarTransporte(string nome, char tipo, int capacidade, in
     }
 }
 
+Transporte* Controlador::pesquisarTransporte(string nome) {
+    if (transportes == nullptr) {
+        cout << "Erro: Nenhum transporte carregado." << endl;
+        return nullptr;
+    }
+
+    for (auto& transporte : *transportes) {
+        if (transporte.getNome() == nome) {
+            return &transporte;
+        }
+    }
+
+    cout << "Transporte " << nome << " não encontrado." << endl;
+    return nullptr;
+}
+
 void Controlador::relatarTransportes(){
     if(transportes != nullptr){
         for (auto& transporte: *transportes){
@@ -169,10 +210,65 @@ Controlador::~Controlador(){
     delete transportes;
 }
 
-// void iniciarViagem(string nomeTransporte, vector<string> nomesPassageiros, string nomeOrigem, string nomeDestino){
-//     //criar uma funcao que acesse o vetor de transportes, use o getNome() e retorne o nome do transporte
-//     //fazer o mesmo para nomeOrigem e nomeDestino
-// }
+void Controlador::iniciarViagem(string nomeTransporte, vector<string> nomesPassageiros, string nomeOrigem, string nomeDestino) {
+
+    Transporte* transporte = this->pesquisarTransporte(nomeTransporte);
+    Cidade* cidadeOrigem = this->pesquisarCidade(nomeOrigem);
+    Cidade* cidadeDestino = this->pesquisarCidade(nomeDestino);
+
+    if (transporte == nullptr || cidadeOrigem == nullptr || cidadeDestino == nullptr) {
+        cout << "Viagem não iniciada." << endl;
+        return;
+    }
+
+    if (transporte->getLocalAtual() != cidadeOrigem){
+        cout << "O transporte não está na cidade de origem.\n";
+        cout << "Viagem não iniciada\n.";
+        return;
+    }
+    
+    vector<Passageiro*> passageirosViagem;
+    for (const auto& nomePassageiro : nomesPassageiros) {
+        Passageiro* passageiro = this->pesquisarPassageiro(nomePassageiro);
+
+        if (passageiro != nullptr) {
+            if (passageiro->getLocalAtual() != cidadeOrigem){
+                cout << "Passageiro " << nomePassageiro << "não está na Cidade de Origem";
+            }
+
+            passageirosViagem.emplace_back(passageiro);
+        } else {
+            cout << "Passageiro " << nomePassageiro << " não encontrado." << endl;
+        }
+    }
+
+    if (transporte->getCapacidade()<static_cast<int>(passageirosViagem.size())) {
+        cout << "Capacidade do transporte foi excedida.\n";
+        cout << "Viagem não iniciada\n";
+        return;
+    }
+
+    vector<Trajeto> melhorTrajeto = Rota::calcularMelhorRota(trajetos, cidadeOrigem, cidadeDestino, transporte->getTipo());
+
+    if (melhorTrajeto.empty()) {
+        cout << "Não foi possível encontrar um trajeto entre as cidades com o tipo de transporte especificado." << endl;
+        return;
+    }
+
+    Viagem* viagemAtual = nullptr;
+    for (size_t i = 0; i < melhorTrajeto.size(); ++i) {
+        Viagem* novaViagem = new Viagem(transporte, passageirosViagem, melhorTrajeto[i].getOrigem(), melhorTrajeto[i].getDestino(), 0, 0, false, viagemAtual);
+
+        viagemAtual = novaViagem;
+        if (i == 0) {
+            Cidade* emTransito = &(*cidades)[0];
+            viagemAtual->iniciarViagem(emTransito);
+        }
+        salvarViagem(viagemAtual);
+    }
+
+    cout << "Viagem iniciada com sucesso!" << endl;
+}
 
 // void avancarHoras(){
 //     //transporte e viagem
