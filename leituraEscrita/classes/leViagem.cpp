@@ -29,7 +29,7 @@ void salvarViagem(Viagem *viagem){
     }
 }
 
-vector<Viagem>* carregarViagem(
+vector<Viagem>* carregarViagens(
     vector<Cidade>* cidades, function<Cidade*(const string&)> pesquisarCidade,
     vector<Passageiro>* passageiros, function<Passageiro*(const string&)> pesquisarPassageiro,
     vector<Transporte>* transportes, function<Transporte*(const string&)> pesquisarTransporte,

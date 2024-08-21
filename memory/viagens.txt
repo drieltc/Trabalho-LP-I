@@ -1,3 +1,1 @@
-Carro_Terrestre,1,Zé,Natal,Currais_Novos,0,0,0,0
-Carro_Terrestre,1,Zé,Parnamirim,Natal,0,0,1,0x5e713e4d5960
-Caminhão,3,Adriel,Eduardo,João,Natal,Parnamirim,0,0,1,0
+
