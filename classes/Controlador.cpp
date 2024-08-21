@@ -14,10 +14,25 @@ Controlador::Controlador(){
     auto pesquisarCidadeLambda = [this](const string& nome) -> Cidade* {
         return this->pesquisarCidade(nome);
     };
+    auto pesquisarPassageiroLambda = [this](const string& nome) -> Passageiro*{
+        return this->pesquisarPassageiro(nome);
+    };
+    auto pesquisarTransporteLambda = [this](const string& nome) -> Transporte*{
+        return this->pesquisarTransporte(nome);
+    };
+    auto pesquisarTrajetoLambda = [this](const string& nomeOrigem, const string&nomeDestino, const char& tipo) -> Trajeto*{
+        return this->pesquisarTrajeto(nomeOrigem, nomeDestino, tipo);
+    };
 
     passageiros = carregarPassageiros(cidades, pesquisarCidadeLambda);
     trajetos = carregarTrajetos(cidades, pesquisarCidadeLambda);
     transportes = carregarTransportes(cidades, pesquisarCidadeLambda);
+    viagens = carregarViagens(
+        cidades,pesquisarCidadeLambda,
+        passageiros, pesquisarPassageiroLambda,
+        transportes, pesquisarTransporteLambda,
+        trajetos, pesquisarTrajetoLambda
+    );
 }
 
 void Controlador::cadastrarCidade(string nome){
@@ -146,6 +161,17 @@ void Controlador::cadastrarTrajeto(string nomeOrigem, string nomeDestino, char t
     }
 }
 
+Trajeto* Controlador::pesquisarTrajeto(string nomeOrigem, string nomeDestino, char tipo) {
+    for (Trajeto& trajeto : *trajetos) {
+        if (trajeto.getOrigem()->getNome() == nomeOrigem &&
+            trajeto.getDestino()->getNome() == nomeDestino &&
+            trajeto.getTipo() == tipo) {
+            return &trajeto;
+        }
+    }
+    return nullptr;
+}
+
 void Controlador::cadastrarTransporte(string nome, char tipo, int capacidade, int velocidade, string nomeLocalAtual, int distanciaEntreDescansos, int tempoDescanso){
    
     Cidade* cidadeLocalAtual = pesquisarCidade(nomeLocalAtual);
@@ -257,7 +283,14 @@ void Controlador::iniciarViagem(string nomeTransporte, vector<string> nomesPassa
 
     Viagem* proximaViagem = nullptr;
     for (size_t i = melhorTrajeto.size(); i-- > 0;) {  // Loop reverso
-        Viagem* novaViagem = new Viagem(transporte, passageirosViagem, melhorTrajeto[i].getOrigem(), melhorTrajeto[i].getDestino(), 0, 0, false, proximaViagem);
+        bool hasProxima = false;
+        if (proximaViagem == nullptr){
+            hasProxima = false;
+        } else {
+            hasProxima = true;
+        }
+
+        Viagem* novaViagem = new Viagem(transporte, passageirosViagem, &melhorTrajeto[i], 0, 0, false, hasProxima,proximaViagem);
 
         proximaViagem = novaViagem;
         if (i == 0) {  // Iniciar a primeira viagem
@@ -270,6 +303,7 @@ void Controlador::iniciarViagem(string nomeTransporte, vector<string> nomesPassa
     cout << "Viagem iniciada com sucesso!" << endl;
     //salvar as mudancas de cidade de pessoas e transportes
     //quando o programa voltar, nao necessariamente o endereco de memoria da proxima viagem será o mesmo
+    //pedir p o chat olhar cada arquivo e refatoralo se possivel
 }
 
 // void avancarHoras(){
