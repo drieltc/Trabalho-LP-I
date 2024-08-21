@@ -300,6 +300,26 @@ void Controlador::iniciarViagem(string nomeTransporte, vector<string> nomesPassa
         salvarViagem(proximaViagem);
     }
 
+    auto pesquisarCidadeLambda = [this](const string& nome) -> Cidade* {
+        return this->pesquisarCidade(nome);
+    };
+    auto pesquisarPassageiroLambda = [this](const string& nome) -> Passageiro*{
+        return this->pesquisarPassageiro(nome);
+    };
+    auto pesquisarTransporteLambda = [this](const string& nome) -> Transporte*{
+        return this->pesquisarTransporte(nome);
+    };
+    auto pesquisarTrajetoLambda = [this](const string& nomeOrigem, const string&nomeDestino, const char& tipo) -> Trajeto*{
+        return this->pesquisarTrajeto(nomeOrigem, nomeDestino, tipo);
+    };
+
+    viagens = carregarViagens(
+        cidades,pesquisarCidadeLambda,
+        passageiros, pesquisarPassageiroLambda,
+        transportes, pesquisarTransporteLambda,
+        trajetos, pesquisarTrajetoLambda
+    );
+    
     cout << "Viagem iniciada com sucesso!" << endl;
     //salvar as mudancas de cidade de pessoas e transportes
     //quando o programa voltar, nao necessariamente o endereco de memoria da proxima viagem será o mesmo
