@@ -211,7 +211,6 @@ Controlador::~Controlador(){
 }
 
 void Controlador::iniciarViagem(string nomeTransporte, vector<string> nomesPassageiros, string nomeOrigem, string nomeDestino) {
-
     Transporte* transporte = this->pesquisarTransporte(nomeTransporte);
     Cidade* cidadeOrigem = this->pesquisarCidade(nomeOrigem);
     Cidade* cidadeDestino = this->pesquisarCidade(nomeDestino);
@@ -221,19 +220,19 @@ void Controlador::iniciarViagem(string nomeTransporte, vector<string> nomesPassa
         return;
     }
 
-    if (transporte->getLocalAtual() != cidadeOrigem){
+    if (transporte->getLocalAtual() != cidadeOrigem) {
         cout << "O transporte não está na cidade de origem.\n";
         cout << "Viagem não iniciada\n.";
         return;
     }
-    
+
     vector<Passageiro*> passageirosViagem;
     for (const auto& nomePassageiro : nomesPassageiros) {
         Passageiro* passageiro = this->pesquisarPassageiro(nomePassageiro);
 
         if (passageiro != nullptr) {
-            if (passageiro->getLocalAtual() != cidadeOrigem){
-                cout << "Passageiro " << nomePassageiro << "não está na Cidade de Origem";
+            if (passageiro->getLocalAtual() != cidadeOrigem) {
+                cout << "Passageiro " << nomePassageiro << " não está na Cidade de Origem";
             }
 
             passageirosViagem.emplace_back(passageiro);
@@ -242,7 +241,7 @@ void Controlador::iniciarViagem(string nomeTransporte, vector<string> nomesPassa
         }
     }
 
-    if (transporte->getCapacidade()<static_cast<int>(passageirosViagem.size())) {
+    if (transporte->getCapacidade() < static_cast<int>(passageirosViagem.size())) {
         cout << "Capacidade do transporte foi excedida.\n";
         cout << "Viagem não iniciada\n";
         return;
@@ -255,19 +254,22 @@ void Controlador::iniciarViagem(string nomeTransporte, vector<string> nomesPassa
         return;
     }
 
-    Viagem* viagemAtual = nullptr;
-    for (size_t i = 0; i < melhorTrajeto.size(); ++i) {
-        Viagem* novaViagem = new Viagem(transporte, passageirosViagem, melhorTrajeto[i].getOrigem(), melhorTrajeto[i].getDestino(), 0, 0, false, viagemAtual);
+    Viagem* proximaViagem = nullptr;
+    for (size_t i = melhorTrajeto.size(); i-- > 0;) {  // Loop reverso
+        Viagem* novaViagem = new Viagem(transporte, passageirosViagem, melhorTrajeto[i].getOrigem(), melhorTrajeto[i].getDestino(), 0, 0, false, proximaViagem);
 
-        viagemAtual = novaViagem;
-        if (i == 0) {
-            Cidade* emTransito = &(*cidades)[0];
-            viagemAtual->iniciarViagem(emTransito);
+        proximaViagem = novaViagem;
+        if (i == 0) {  // Iniciar a primeira viagem
+            //Cidade* emTransito = &(*cidades)[0];
+            proximaViagem->iniciarViagem(&(*cidades)[0]);
         }
-        salvarViagem(viagemAtual);
+        salvarViagem(proximaViagem);
     }
 
     cout << "Viagem iniciada com sucesso!" << endl;
+    //salvar as mudancas de cidade de pessoas e transportes
+    //quando o programa voltar, nao necessariamente o endereco de memoria da proxima viagem será o mesmo
+    //criar gitignore com os objetos
 }
 
 // void avancarHoras(){
