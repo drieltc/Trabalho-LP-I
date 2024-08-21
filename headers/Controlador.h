@@ -1,4 +1,4 @@
-#ifndef CCONTROLADOR_H
+#ifndef CONTROLADOR_H
 #define CONTROLADOR_H
 
 #include <string>
@@ -27,6 +27,7 @@ public:
     Passageiro* pesquisarPassageiro(string nome);
     void relatarPassageiros();
     void cadastrarTrajeto(string nomeOrigem, string nomeDestino, char tipo, int distancia);
+    Trajeto* pesquisarTrajeto(string nomeOrigem, string nomeDestino, char tipo);
     void cadastrarTransporte(string nome, char tipo, int capacidade, int velocidade,  string nomeLocalAtual, int distanciaEntreDescansos, int tempoDescanso);
     Transporte* pesquisarTransporte(string nome);
     void relatarTransportes();
@@ -34,4 +35,4 @@ public:
     // void avancarHoras();
 };
 
-#endif // CCONTROLADOR_H
+#endif // CONTROLADOR_H
