@@ -93,7 +93,15 @@ vector<Viagem>* carregarViagens(
             ss >> hasProxima;
 
             // Criar o objeto Viagem e adicionar ao vetor
-            Viagem* novaViagem = new Viagem(transporte, passageirosViagem, trajeto, horasEmTransito, distanciaPercorrida, emAndamento, hasProxima, nullptr);
+            Viagem* endProxima;
+            if (hasProxima){
+                //acessar o último valor do vetor e pegar o endereco de seu ultimo valor
+                endProxima = &viagens->back();
+            } else {
+                endProxima = nullptr;
+            }
+
+            Viagem* novaViagem = new Viagem(transporte, passageirosViagem, trajeto, horasEmTransito, distanciaPercorrida, emAndamento, hasProxima, endProxima);
             viagens->push_back(*novaViagem);
         }
         arquivoViagens.close();
