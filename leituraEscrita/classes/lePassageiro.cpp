@@ -9,7 +9,9 @@ using namespace std;
 void salvarPassageiro(Passageiro *passageiro){
     ofstream arquivoPassageiros("memory/passageiros.txt", ios::app);
     if (arquivoPassageiros.is_open()){
-        arquivoPassageiros << passageiro->getNome() << "," << passageiro->getLocalAtual()->getNome() << endl;
+        arquivoPassageiros
+        << passageiro->getNome() << ","
+        << passageiro->getLocalAtual()->getNome() << endl;
         arquivoPassageiros.close();
     } else {
         cerr << "Não foi possível abrir o arquivo passageiros.txt para escrita." << endl;

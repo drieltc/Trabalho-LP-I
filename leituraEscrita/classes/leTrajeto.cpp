@@ -7,7 +7,11 @@
 void salvarTrajeto(Trajeto *trajeto){
     ofstream arquivoTrajetos("memory/trajetos.txt", ios::app);
     if (arquivoTrajetos.is_open()){
-        arquivoTrajetos << trajeto->getOrigem()->getNome() << "," << trajeto->getDestino()->getNome() << "," << trajeto->getTipo() << "," << trajeto->getDistancia() << endl;
+        arquivoTrajetos
+        << trajeto->getOrigem()->getNome() << ","
+        << trajeto->getDestino()->getNome() << ","
+        << trajeto->getTipo() << ","
+        << trajeto->getDistancia() << endl;
         arquivoTrajetos.close();
     } else{
         cerr << "Não foi possível abrir o arquivo trajetos.txt para escrita.\n";
