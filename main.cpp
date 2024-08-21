@@ -97,6 +97,37 @@ void cadastrarTransporte(Controlador* control){
     control->cadastrarTransporte(nome, tipo, capacidade, velocidade, nomeLocalAtual, distanciaEntreDescansos, tempoDescanso);
 }
 
+void iniciarViagem(Controlador* control){
+    cout << "Opção Selecionada: INICIAR VIAGEM\n\n";
+
+    string nomeTransporte;
+    cout << "Digite o nome do Transporte: ";
+    cin >> nomeTransporte;
+
+    vector<string> nomesPassageiros;
+    int numPassageiros;
+    cout << "Digite a quantidade de passageiros: ";
+    cin >> numPassageiros;
+
+    nomesPassageiros.clear();
+    for (int i = 0; i < numPassageiros; ++i) {
+        string nomePassageiro;
+        cout << "Nome do passageiro " << i + 1 << ": ";
+        cin >> nomePassageiro;
+        nomesPassageiros.push_back(nomePassageiro);
+    }
+
+    string nomeOrigem;
+    cout << "Digite o nome da cidade de origem: ";
+    cin >> nomeOrigem;
+
+    string nomeDestino;
+    cout << "Digite o nome da cidade de destino: ";
+    cin >> nomeDestino;
+
+    control->iniciarViagem(nomeTransporte, nomesPassageiros, nomeOrigem, nomeDestino);
+}
+
 void relatarPassageiros(Controlador* control){
     cout << "Opção Selecionada: RELATAR PASSAGEIROS\n\n";
 
@@ -125,10 +156,8 @@ void mostrarMenu(){
     cout << "[3] - Cadastrar Novo Trajeto\n";
     cout << "[4] - Cadastrar Novo Transporte\n";
     cout << "[5] - Iniciar Viagem\n";
-    cout << "[6] - Relatar Pessoas\n";
-    cout << "[7] - Relatar Transportes\n";
-    cout << "[8] - Relatar Viagens\n";
-    cout << "[9] - Ver cidades mais visitadas\n";
+    cout << "[6] - Avançar Horas\n";
+    cout << "[7] - Relatar Estados\n";
     cout << "[0] - Sair\n";
     cout << "Digite sua opção: ";  
 }
@@ -157,19 +186,13 @@ int main() {
                 cadastrarTransporte(control);
                 break;
             case 5:
-                // Função para gerenciar viagens
+                iniciarViagem(control);
                 break;
             case 6:
-                relatarPassageiros(control);
+                // funcao para avancar horas
                 break;
             case 7:
-                relatarTransportes(control);
-                break;
-            case 8:
-                // Função para relatar viagens
-                break;
-            case 9:
-                relatarCidades(control);
+                // funcao para relatar estados
                 break;
             case 0:
                 running = false;
