@@ -21,8 +21,8 @@ void salvarViagem(Viagem *viagem){
         << viagem->getHorasEmTransito() << ","
         << viagem->getDistanciaPercorrida() << ","
         << viagem->isEmAndamento() << ","
-        << viagem->getHasProxima() << ","
-        << viagem->getProxima() << endl;
+        << viagem->getHasProxima() << endl;
+        //<< viagem->getProxima() << endl;
         arquivoViagem.close();
     } else {
         cerr << "Não foi possível abrir o arquivo viagens.txt para escrita.\n";
