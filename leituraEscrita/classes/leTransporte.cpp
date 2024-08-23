@@ -15,7 +15,8 @@ void salvarTransporte(Transporte *transporte){
         << transporte->getLocalAtual()->getNome() << ","
         << transporte->getDistanciaEntreDescansos() << ","
         << transporte->getTempoDescanso() << ","
-        << transporte->getTempoDescansoAtual() << endl;
+        << transporte->getTempoDescansoAtual() << ","
+        << (transporte->getDescansando() ? "1" : "0") << endl;
         arquivoTransporte.close();
     } else {
         cerr << "Não foi possível abrir o arquivo transportes.txt para escrita.\n";
@@ -36,8 +37,9 @@ vector<Transporte>* carregarTransportes(vector<Cidade>* cidades, function<Cidade
             size_t pos5 = linha.find(",", pos4 + 1);
             size_t pos6 = linha.find(",", pos5 + 1);
             size_t pos7 = linha.find(",", pos6 + 1);
+            size_t pos8 = linha.find(",", pos7 + 1);
 
-            if (pos1 != string::npos && pos2 != string::npos && pos3 != string::npos && pos4 != string::npos && pos5 != string::npos && pos6 != string::npos && pos7 != string::npos) {
+            if (pos1 != string::npos && pos2 != string::npos && pos3 != string::npos && pos4 != string::npos && pos5 != string::npos && pos6 != string::npos && pos7 != string::npos && pos8 != string::npos) {
                 string nome = linha.substr(0, pos1);
                 char tipo = linha[pos1 + 1];
                 int capacidade = stoi(linha.substr(pos2 + 1, pos3 - pos2 - 1));
@@ -45,12 +47,13 @@ vector<Transporte>* carregarTransportes(vector<Cidade>* cidades, function<Cidade
                 string nomeCidadeAtual = linha.substr(pos4 + 1, pos5 - pos4 - 1);
                 int distanciaEntreDescansos = stoi(linha.substr(pos5 + 1, pos6 - pos5 - 1));
                 int tempoDescanso = stoi(linha.substr(pos6 + 1, pos7 - pos6 - 1));
-                int tempoDescansoAtual = stoi(linha.substr(pos7 + 1));
+                int tempoDescansoAtual = stoi(linha.substr(pos7 + 1, pos8 - pos7 -1));
+                bool descansando = (linha.substr(pos8+1) == "1");
 
                 Cidade* cidadeAtual = pesquisarCidade(nomeCidadeAtual);
 
                 if (cidadeAtual != nullptr) {
-                    transportes->emplace_back(nome, tipo, capacidade, velocidade, cidadeAtual, distanciaEntreDescansos, tempoDescanso, tempoDescansoAtual);
+                    transportes->emplace_back(nome, tipo, capacidade, velocidade, cidadeAtual, distanciaEntreDescansos, tempoDescanso, tempoDescansoAtual, descansando);
                 }
             }
         }
