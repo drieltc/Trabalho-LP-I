@@ -322,7 +322,6 @@ void Controlador::iniciarViagem(string nomeTransporte, vector<string> nomesPassa
     
     cout << "Viagem iniciada com sucesso!" << endl;
     //salvar as mudancas de cidade de pessoas e transportes
-    //quando o programa voltar, nao necessariamente o endereco de memoria da proxima viagem será o mesmo
     //pedir p o chat olhar cada arquivo e refatoralo se possivel
 }
 

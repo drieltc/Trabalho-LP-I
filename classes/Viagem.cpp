@@ -64,19 +64,26 @@ void Viagem::iniciarViagem(Cidade* emTransito){
     transporte->setLocalAtual(emTransito);
 }
 
-void Viagem::finalizarViagem(){
+void Viagem::finalizarViagem(Cidade* emTransito){
     if (isEmAndamento()){
         this->emAndamento = false;
         this->horasEmTransito = 0;
+    }
+
+    for (auto& passageiro : passageiros){
+        passageiro->setLocalAtual(trajeto->getDestino());
+    }
+
+    transporte->setLocalAtual(trajeto->getDestino());
+    
+    if(this->getHasProxima()){
+        this->getProxima()->iniciarViagem(emTransito);
     }
 }
 
 void Viagem::avancarHoras(){
     if (isEmAndamento()){
       this->horasEmTransito = this->horasEmTransito + 1;
-    }
-    else{
-        cout << "Viagem não iniciada" << endl;
     }
 }
 
