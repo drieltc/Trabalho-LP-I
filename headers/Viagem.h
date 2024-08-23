@@ -36,7 +36,7 @@ public:
     Viagem* getProxima();
 
     void iniciarViagem(Cidade* emTransito);
-    void finalizarViagem();
+    void finalizarViagem(Cidade* emTransito);
     void avancarHoras();
     void relatarEstado();
 
