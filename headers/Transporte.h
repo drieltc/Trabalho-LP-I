@@ -27,7 +27,8 @@ private:
     int getTempoDescansoAtual();
     Cidade* getLocalAtual();
     bool getDescansando();
-
+    
+    void zerarDescanso();
     void aumentarTempoDescansoAtual(); //aumenta o tempo de descanso atual em 1
     void setLocalAtual(Cidade* novoLocal);
     void setDescansando(bool descansando);

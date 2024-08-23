@@ -128,6 +128,12 @@ void iniciarViagem(Controlador* control){
     control->iniciarViagem(nomeTransporte, nomesPassageiros, nomeOrigem, nomeDestino);
 }
 
+void avancarHora(Controlador* control){
+    cout << "Opção Selecionada: AVANÇAR HORA";
+
+    control->avancarHoras();
+}
+
 void relatarPassageiros(Controlador* control){
     cout << "Opção Selecionada: RELATAR PASSAGEIROS\n\n";
 
@@ -189,7 +195,7 @@ int main() {
                 iniciarViagem(control);
                 break;
             case 6:
-                // funcao para avancar horas
+                avancarHora(control);
                 break;
             case 7:
                 // funcao para relatar estados

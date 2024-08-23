@@ -224,19 +224,6 @@ void Controlador::relatarTransportes(){
     cout << endl;
 }
 
-Controlador::~Controlador(){
-    for (auto& cidade : *cidades) delete &cidade;
-    for (auto& trajeto : *trajetos) delete &trajeto;
-    for (auto& transporte : *transportes) delete &transporte;
-    for (auto& passageiro : *passageiros) delete &passageiro;
-    for (auto& viagem : *viagens) delete &viagem;
-    delete cidades;
-    delete passageiros;
-    delete trajetos;
-    delete transportes;
-    delete viagens;
-}
-
 void Controlador::iniciarViagem(string nomeTransporte, vector<string> nomesPassageiros, string nomeOrigem, string nomeDestino) {
     Transporte* transporte = this->pesquisarTransporte(nomeTransporte);
     Cidade* cidadeOrigem = this->pesquisarCidade(nomeOrigem);
@@ -325,6 +312,31 @@ void Controlador::iniciarViagem(string nomeTransporte, vector<string> nomesPassa
     //pedir p o chat olhar cada arquivo e refatoralo se possivel
 }
 
-// void avancarHoras(){
-//     //transporte e viagem
-// }
+void Controlador::avancarHoras(){
+    //transporte e viagem
+    for (auto& viagem : *viagens){
+        if (viagem.isEmAndamento()){
+            if (viagem.getTransporte()->getDescansando()){
+                viagem.getTransporte()->aumentarTempoDescansoAtual();
+                if (viagem.getTransporte()->getTempoDescansoAtual() >= viagem.getTransporte()->getTempoDescanso()){
+                    viagem.getTransporte()->zerarDescanso();
+                }
+            } else {
+                
+            }
+        }
+    }
+}
+
+Controlador::~Controlador(){
+    for (auto& cidade : *cidades) delete &cidade;
+    for (auto& trajeto : *trajetos) delete &trajeto;
+    for (auto& transporte : *transportes) delete &transporte;
+    for (auto& passageiro : *passageiros) delete &passageiro;
+    for (auto& viagem : *viagens) delete &viagem;
+    delete cidades;
+    delete passageiros;
+    delete trajetos;
+    delete transportes;
+    delete viagens;
+}

@@ -32,7 +32,7 @@ public:
     Transporte* pesquisarTransporte(string nome);
     void relatarTransportes();
     void iniciarViagem(string nomeTransporte, vector<string> nomesPassageiros, string nomeOrigem, string nomeDestino);
-    // void avancarHoras();
+    void avancarHoras();
 };
 
 #endif // CONTROLADOR_H

@@ -84,6 +84,25 @@ void Viagem::finalizarViagem(Cidade* emTransito){
 void Viagem::avancarHoras(){
     if (isEmAndamento()){
       this->horasEmTransito = this->horasEmTransito + 1;
+      if (this->transporte->getDescansando()){
+        this->transporte->aumentarTempoDescansoAtual();
+        if (this->transporte->getTempoDescansoAtual() >= this->transporte->getTempoDescanso()){
+            this->transporte->zerarDescanso();
+        }
+      }
+      else {
+        this->distanciaPercorrida = this->getDistanciaPercorrida() + this->transporte->getVelocidade();
+
+        if (this->getDistanciaPercorrida() >= this->trajeto->getDistancia()){
+            this->setDistanciaPercorrida(this->trajeto->getDistancia());
+            this->finalizarViagem();
+        }
+
+        if (this->transporte->getDistanciaEntreDescansos() >= this->getDistanciaPercorrida()){
+            this->setDistanciaPercorrida(this->trajeto->getDistancia());
+            this->transporte->setDescansando(true);
+        } 
+      }
     }
 }
 

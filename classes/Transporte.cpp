@@ -48,11 +48,13 @@ bool Transporte::getDescansando(){
     return this->descansando;
 }
 
+void Transporte::zerarDescanso(){
+    this->tempoDescansoAtual = 0;
+    this->setDescansando(false);
+}
+
 void Transporte::aumentarTempoDescansoAtual(){
     this->tempoDescansoAtual = this->tempoDescansoAtual + 1;
-    if (tempoDescansoAtual == tempoDescanso){
-        tempoDescansoAtual = 0;
-    }
 }
 
 void Transporte::setLocalAtual(Cidade* novoLocal){
