@@ -35,9 +35,10 @@ public:
     Trajeto* getTrajeto();
     Viagem* getProxima();
 
+    void setDistanciaPercorrida(int distancia);
     void iniciarViagem(Cidade* emTransito);
     void finalizarViagem(Cidade* emTransito);
-    void avancarHoras();
+    void avancarHoras(Cidade* emTransito);
     void relatarEstado();
 
 };

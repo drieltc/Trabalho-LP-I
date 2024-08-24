@@ -315,17 +315,33 @@ void Controlador::iniciarViagem(string nomeTransporte, vector<string> nomesPassa
 void Controlador::avancarHoras(){
     //transporte e viagem
     for (auto& viagem : *viagens){
-        if (viagem.isEmAndamento()){
-            if (viagem.getTransporte()->getDescansando()){
-                viagem.getTransporte()->aumentarTempoDescansoAtual();
-                if (viagem.getTransporte()->getTempoDescansoAtual() >= viagem.getTransporte()->getTempoDescanso()){
-                    viagem.getTransporte()->zerarDescanso();
-                }
-            } else {
-                
-            }
-        }
+        viagem.avancarHoras(&(*cidades)[0]);
     }
+}
+
+void Controlador::salvarSair(){
+
+    //apagar cidades.txt
+    //apagar passageiros.txt
+    //apagar trajetos.txt
+    //apagar transportes.txt
+    //apagar viagens.txt
+
+    for (auto& cidade : *cidades){
+        salvarCidade(&cidade);
+    }
+    for (auto& passageiro : *passageiros){
+        salvarPassageiro(&passageiro);
+    }
+    for (auto& trajeto : *trajetos){
+        salvarTrajeto(&trajeto);
+    }
+    for (auto& transporte : *transportes){
+        salvarTransporte(&transporte);
+    }
+    for (auto& viagem : *viagens){
+        salvarViagem(&viagem);
+    }       
 }
 
 Controlador::~Controlador(){

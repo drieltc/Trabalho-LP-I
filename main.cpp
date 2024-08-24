@@ -129,7 +129,7 @@ void iniciarViagem(Controlador* control){
 }
 
 void avancarHora(Controlador* control){
-    cout << "Opção Selecionada: AVANÇAR HORA";
+    cout << "Opção Selecionada: AVANÇAR HORA\n\n";
 
     control->avancarHoras();
 }
@@ -164,7 +164,7 @@ void mostrarMenu(){
     cout << "[5] - Iniciar Viagem\n";
     cout << "[6] - Avançar Horas\n";
     cout << "[7] - Relatar Estados\n";
-    cout << "[0] - Sair\n";
+    cout << "[0] - Salvar e Sair\n";
     cout << "Digite sua opção: ";  
 }
 
@@ -203,6 +203,13 @@ int main() {
             case 0:
                 running = false;
                 cout << "Encerrando\n";
+
+                control->salvarSair();
+                //salvar viagens
+                //salvar passageiros
+                //salvar transportes
+                //salvar trajetos
+                //salvar cidades
                 break;
             default:
                 cout << "Opção Inválida\n";

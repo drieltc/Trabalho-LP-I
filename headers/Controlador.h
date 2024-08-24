@@ -33,6 +33,7 @@ public:
     void relatarTransportes();
     void iniciarViagem(string nomeTransporte, vector<string> nomesPassageiros, string nomeOrigem, string nomeDestino);
     void avancarHoras();
+    void salvarSair();
 };
 
 #endif // CONTROLADOR_H

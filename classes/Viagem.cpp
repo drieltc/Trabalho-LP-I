@@ -79,23 +79,29 @@ void Viagem::finalizarViagem(Cidade* emTransito){
     if(this->getHasProxima()){
         this->getProxima()->iniciarViagem(emTransito);
     }
+
+    this->getTrajeto()->getDestino()->addVisitantes(this->getPassageiros().size());
 }
 
-void Viagem::avancarHoras(){
+void Viagem::avancarHoras(Cidade* emTransito){
+
     if (isEmAndamento()){
       this->horasEmTransito = this->horasEmTransito + 1;
+
       if (this->transporte->getDescansando()){
         this->transporte->aumentarTempoDescansoAtual();
+
         if (this->transporte->getTempoDescansoAtual() >= this->transporte->getTempoDescanso()){
             this->transporte->zerarDescanso();
         }
       }
+
       else {
         this->distanciaPercorrida = this->getDistanciaPercorrida() + this->transporte->getVelocidade();
 
         if (this->getDistanciaPercorrida() >= this->trajeto->getDistancia()){
             this->setDistanciaPercorrida(this->trajeto->getDistancia());
-            this->finalizarViagem();
+            this->finalizarViagem(emTransito);
         }
 
         if (this->transporte->getDistanciaEntreDescansos() >= this->getDistanciaPercorrida()){
@@ -108,4 +114,8 @@ void Viagem::avancarHoras(){
 
 void Viagem::relatarEstado(){
     cout << "FINALIZAR!!!!!";
+}
+
+void Viagem::setDistanciaPercorrida(int distancia){
+    this->distanciaPercorrida = distancia;
 }
