@@ -34,6 +34,7 @@ public:
     void iniciarViagem(string nomeTransporte, vector<string> nomesPassageiros, string nomeOrigem, string nomeDestino);
     void avancarHoras();
     void salvarSair();
+    void relatarEstados();
 };
 
 #endif // CONTROLADOR_H

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "../headers/Controlador.h"
 #include "../leituraEscrita/headers/leCidade.h"
 #include "../leituraEscrita/headers/lePassageiro.h"
@@ -66,7 +67,7 @@ Cidade* Controlador::pesquisarCidade(string nome){
     }
 
     for (auto& cidade: *cidades){
-        if (cidade.getNome() == nome && cidade.getNome() != "Em_Transito"){
+        if (cidade.getNome() == nome){
             return &cidade;
         }
     }
@@ -308,24 +309,31 @@ void Controlador::iniciarViagem(string nomeTransporte, vector<string> nomesPassa
     );
     
     cout << "Viagem iniciada com sucesso!" << endl;
-    //salvar as mudancas de cidade de pessoas e transportes
     //pedir p o chat olhar cada arquivo e refatoralo se possivel
 }
 
 void Controlador::avancarHoras(){
-    //transporte e viagem
     for (auto& viagem : *viagens){
         viagem.avancarHoras(&(*cidades)[0]);
     }
 }
 
-void Controlador::salvarSair(){
+void apagarArquivo(const string& caminhoArquivo) {
+    ofstream arquivo(caminhoArquivo, ios::trunc);  // ios::trunc limpa o conteúdo do arquivo
+    if (arquivo.is_open()) {
+        arquivo.close();
+    } else {
+        cerr << "Erro ao tentar apagar o conteúdo de " << caminhoArquivo << endl;
+    }
+}
 
-    //apagar cidades.txt
-    //apagar passageiros.txt
-    //apagar trajetos.txt
-    //apagar transportes.txt
-    //apagar viagens.txt
+void Controlador::salvarSair() {
+    // Apagar os arquivos de memória
+    apagarArquivo("memory/cidades.txt");
+    apagarArquivo("memory/passageiros.txt");
+    apagarArquivo("memory/trajetos.txt");
+    apagarArquivo("memory/transportes.txt");
+    apagarArquivo("memory/viagens.txt");
 
     for (auto& cidade : *cidades){
         salvarCidade(&cidade);
@@ -342,6 +350,10 @@ void Controlador::salvarSair(){
     for (auto& viagem : *viagens){
         salvarViagem(&viagem);
     }       
+}
+
+void Controlador::relatarEstados(){
+    
 }
 
 Controlador::~Controlador(){

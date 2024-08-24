@@ -1,10 +1,10 @@
 João,Natal
-Zé,Parnamirim
+Zé,Natal
 Caio,Japecanga
 Isaac,Macaíba
 Chico_Tripa,Parnamoscow
 Ana,Rio_de_Janeiro
-Lucas,Currais_Novos
+Lucas,Em_Transito
 Mariana,Apodi
 Fernanda,Assú
 Pedro,Fortaleza
@@ -18,4 +18,6 @@ Carla,São_Gonçalo
 Renato,Caicó
 Patrícia,São_Paulo
 Eduardo,Natal
-Adriel,Natal
+Adriel,Currais_Novos
+Luigi,Parnamirim
+Torquato,Natal

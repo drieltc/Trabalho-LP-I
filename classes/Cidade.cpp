@@ -1,7 +1,8 @@
 #include "../headers/Cidade.h"
 
-Cidade::Cidade(string nome) {
+Cidade::Cidade(string nome, int visitantes) {
     this->nome = nome;
+    this->visitantes = visitantes;
 }
 
 string Cidade::getNome() {

@@ -81,36 +81,38 @@ void Viagem::finalizarViagem(Cidade* emTransito){
     }
 
     this->getTrajeto()->getDestino()->addVisitantes(this->getPassageiros().size());
+
+    cout << "Viagem de " << this->trajeto->getOrigem()->getNome() << " para " << this->trajeto->getDestino()->getNome() << " finalizada." << endl; 
 }
 
-void Viagem::avancarHoras(Cidade* emTransito){
+void Viagem::avancarHoras(Cidade* emTransito) {
+    if (isEmAndamento()) {
+        this->horasEmTransito++;
 
-    if (isEmAndamento()){
-      this->horasEmTransito = this->horasEmTransito + 1;
+        if (this->transporte->getDescansando()) {
+            this->transporte->aumentarTempoDescansoAtual();
 
-      if (this->transporte->getDescansando()){
-        this->transporte->aumentarTempoDescansoAtual();
+            if (this->transporte->getTempoDescansoAtual() >= this->transporte->getTempoDescanso()) {
+                this->transporte->zerarDescanso();
+            }
+        } else {
+            this->distanciaPercorrida += this->transporte->getVelocidade();
 
-        if (this->transporte->getTempoDescansoAtual() >= this->transporte->getTempoDescanso()){
-            this->transporte->zerarDescanso();
+            // Verifica se a viagem terminou
+            if (this->distanciaPercorrida >= this->trajeto->getDistancia()) {
+                this->distanciaPercorrida = this->trajeto->getDistancia();
+                this->finalizarViagem(emTransito);
+                return;  // Retorna para evitar verificações adicionais após o término da viagem
+            }
+
+            // Verifica se o transporte precisa descansar
+            if (this->distanciaPercorrida >= this->transporte->getDistanciaEntreDescansos()) {
+                this->transporte->setDescansando(true);
+            }
         }
-      }
-
-      else {
-        this->distanciaPercorrida = this->getDistanciaPercorrida() + this->transporte->getVelocidade();
-
-        if (this->getDistanciaPercorrida() >= this->trajeto->getDistancia()){
-            this->setDistanciaPercorrida(this->trajeto->getDistancia());
-            this->finalizarViagem(emTransito);
-        }
-
-        if (this->transporte->getDistanciaEntreDescansos() >= this->getDistanciaPercorrida()){
-            this->setDistanciaPercorrida(this->trajeto->getDistancia());
-            this->transporte->setDescansando(true);
-        } 
-      }
     }
 }
+
 
 void Viagem::relatarEstado(){
     cout << "FINALIZAR!!!!!";
