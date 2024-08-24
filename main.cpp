@@ -1,3 +1,11 @@
+/**
+ * @file main.cpp
+ * @brief Programa principal para gerenciar cidades, passageiros, trajetos, transportes e viagens.
+ * 
+ * Este arquivo contém a implementação da função principal e das funções auxiliares que permitem ao usuário interagir com
+ * o sistema para cadastrar novas cidades, passageiros, trajetos e transportes, iniciar viagens, avançar o tempo e gerar relatórios.
+ */
+
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -11,6 +19,13 @@
 
 using namespace std;
 
+/**
+ * @brief Cadastra uma nova cidade no sistema.
+ * 
+ * Solicita ao usuário o nome de uma nova cidade e a adiciona ao sistema utilizando o objeto `Controlador`.
+ * 
+ * @param control Ponteiro para o objeto `Controlador` usado para realizar o cadastro da cidade.
+ */
 void cadastrarCidade(Controlador* control){
     cout << "Opção Selecionada: CADASTRAR CIDADE\n\n";
     
@@ -21,6 +36,13 @@ void cadastrarCidade(Controlador* control){
     control->cadastrarCidade(nomeCidade);
 }
 
+/**
+ * @brief Cadastra um novo passageiro no sistema.
+ * 
+ * Solicita ao usuário o nome de um passageiro e o nome da cidade em que o passageiro se encontra, e adiciona o passageiro ao sistema.
+ * 
+ * @param control Ponteiro para o objeto `Controlador` usado para realizar o cadastro do passageiro.
+ */
 void cadastrarPassageiro(Controlador* control){
     cout << "Opção Selecionada: CADASTRAR PASSAGEIRO\n\n";
     
@@ -35,6 +57,13 @@ void cadastrarPassageiro(Controlador* control){
     control->cadastrarPassageiro(nomePassageiro, nomeCidade);
 }
 
+/**
+ * @brief Cadastra um novo trajeto no sistema.
+ * 
+ * Solicita ao usuário o nome das cidades de origem e destino, o tipo de trajeto e a distância entre elas, e adiciona o trajeto ao sistema.
+ * 
+ * @param control Ponteiro para o objeto `Controlador` usado para realizar o cadastro do trajeto.
+ */
 void cadastrarTrajeto(Controlador* control){
     cout << "Opção Selecionada: CADASTRAR TRAJETO\n\n";
 
@@ -58,6 +87,14 @@ void cadastrarTrajeto(Controlador* control){
     control->cadastrarTrajeto(cidadeOrigem, cidadeDestino, tipo, distancia);
 }
 
+/**
+ * @brief Cadastra um novo transporte no sistema.
+ * 
+ * Solicita ao usuário o nome do transporte, o tipo, a capacidade, a velocidade, a distância entre descansos, o tempo de descanso e a cidade atual,
+ * e adiciona o transporte ao sistema.
+ * 
+ * @param control Ponteiro para o objeto `Controlador` usado para realizar o cadastro do transporte.
+ */
 void cadastrarTransporte(Controlador* control){
     cout << "Opção Selecionada: CADASTRAR TRANSPORTE\n\n";
 
@@ -97,6 +134,13 @@ void cadastrarTransporte(Controlador* control){
     control->cadastrarTransporte(nome, tipo, capacidade, velocidade, nomeLocalAtual, distanciaEntreDescansos, tempoDescanso);
 }
 
+/**
+ * @brief Inicia uma nova viagem no sistema.
+ * 
+ * Solicita ao usuário o nome do transporte, os nomes dos passageiros, e as cidades de origem e destino, e inicia uma nova viagem no sistema.
+ * 
+ * @param control Ponteiro para o objeto `Controlador` usado para iniciar a viagem.
+ */
 void iniciarViagem(Controlador* control){
     cout << "Opção Selecionada: INICIAR VIAGEM\n\n";
 
@@ -128,12 +172,26 @@ void iniciarViagem(Controlador* control){
     control->iniciarViagem(nomeTransporte, nomesPassageiros, nomeOrigem, nomeDestino);
 }
 
+/**
+ * @brief Avança o tempo no sistema.
+ * 
+ * Avança o tempo em uma unidade no sistema, atualizando o status das viagens e transportes.
+ * 
+ * @param control Ponteiro para o objeto `Controlador` usado para avançar o tempo.
+ */
 void avancarHora(Controlador* control){
     cout << "Opção Selecionada: AVANÇAR HORA\n\n";
 
     control->avancarHoras();
 }
 
+/**
+ * @brief Relata o estado dos passageiros no sistema.
+ * 
+ * Exibe uma lista de passageiros com seus respectivos locais, origens e destinos.
+ * 
+ * @param control Ponteiro para o objeto `Controlador` usado para relatar o estado dos passageiros.
+ */
 void relatarPassageiros(Controlador* control){
     cout << "Opção Selecionada: RELATAR PASSAGEIROS\n\n";
 
@@ -141,20 +199,40 @@ void relatarPassageiros(Controlador* control){
     control->relatarPassageiros();
 }
 
+/**
+ * @brief Relata o estado dos transportes no sistema.
+ * 
+ * Exibe uma lista de transportes com suas características, incluindo nome, tipo, capacidade, velocidade, local atual,
+ * distância entre descansos e tempo de descanso.
+ * 
+ * @param control Ponteiro para o objeto `Controlador` usado para relatar o estado dos transportes.
+ */
 void relatarTransportes(Controlador* control){
-    cout << "Ooção Selecionada: RELATAR TRANSPORTES\n\n";
+    cout << "Opção Selecionada: RELATAR TRANSPORTES\n\n";
 
     cout << "Nome | Tipo | Capacidade | Velocidade (km/h) | Local Atual | Distância Entre Descansos (km) | Tempo de Descanso (h) | Tempo de Descanso Atual (h)\n";
     control->relatarTransportes();
 }
 
+/**
+ * @brief Relata as cidades no sistema.
+ * 
+ * Exibe um relatório das cidades mais visitadas no sistema.
+ * 
+ * @param control Ponteiro para o objeto `Controlador` usado para relatar as cidades.
+ */
 void relatarCidades(Controlador* control){
-    cout << "Opção Selecionada: RELATAR VIAGENS\n\n";
+    cout << "Opção Selecionada: RELATAR CIDADES\n\n";
     cout << "As cidades mais visitadas são:\n";
 
     control->relatarCidades();
 }
 
+/**
+ * @brief Exibe o menu principal para o usuário.
+ * 
+ * Mostra as opções disponíveis para o usuário interagir com o sistema.
+ */
 void mostrarMenu(){
     cout << "O quê deseja fazer? \n";
     cout << "[1] - Cadastrar Nova Cidade\n";
@@ -168,6 +246,14 @@ void mostrarMenu(){
     cout << "Digite sua opção: ";  
 }
 
+/**
+ * @brief Função principal do programa.
+ * 
+ * Inicializa o controlador e exibe o menu principal. Permite ao usuário selecionar ações para cadastrar cidades, passageiros, trajetos, transportes,
+ * iniciar viagens, avançar o tempo e gerar relatórios. Encerra o programa quando o usuário escolhe a opção de sair.
+ * 
+ * @return 0 se a execução for bem-sucedida.
+ */
 int main() {
     Controlador* control = new Controlador();
     int opcao;

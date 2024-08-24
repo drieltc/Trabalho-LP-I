@@ -391,14 +391,10 @@ void Controlador::relatarEstados(){
 }
 
 Controlador::~Controlador(){
-    for (auto& cidade : *cidades) delete &cidade;
-    for (auto& trajeto : *trajetos) delete &trajeto;
-    for (auto& transporte : *transportes) delete &transporte;
-    for (auto& passageiro : *passageiros) delete &passageiro;
-    for (auto& viagem : *viagens) delete &viagem;
+    // Desalocar memória dos vetores
     delete cidades;
-    delete passageiros;
     delete trajetos;
     delete transportes;
+    delete passageiros;
     delete viagens;
 }
