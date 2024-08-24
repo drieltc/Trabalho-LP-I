@@ -23,3 +23,4 @@ Caicó,São_Paulo,T,100
 São_Paulo,Rio_de_Janeiro,T,70
 Itaquecetuba,Natal,A,100
 Curitiba,Natal,T,100
+Porto,Natal,T,10

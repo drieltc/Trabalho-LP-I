@@ -1,9 +1,2 @@
-Carro_Terrestre,Natal,Currais_Novos,1,Zé,0,0,0,0
-Carro_Terrestre,Parnamirim,Natal,1,Zé,0,15,0,1
-Caminhão,Apodi,Assú,1,Adriel,0,0,0,0
-Caminhão,Currais_Novos,Apodi,1,Adriel,0,0,0,1
-Caminhão,Natal,Currais_Novos,1,Adriel,0,25,0,1
-Jumentinho,Currais_Novos,Caicó,1,Lucas,0,45,0,0
-Busao,Natal,Parnamirim,1,Luigi,0,10,0,0
-Jumentinho,Caicó,São_Paulo,1,Lucas,18,55,1,0
-Aviao,Curitiba,Natal,1,Torquato,0,100,0,0
+Motinha,Porto,Natal,1,Bozo,0,10,0,0
+Jumentinho,Natal,Parna,1,João,0,10,0,0

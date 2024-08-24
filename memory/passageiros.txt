@@ -21,3 +21,4 @@ Eduardo,Natal
 Adriel,Currais_Novos
 Luigi,Parnamirim
 Torquato,Natal
+Bozo,Natal

@@ -353,24 +353,27 @@ void Controlador::salvarSair() {
 }
 
 void Controlador::relatarEstados(){
+    cout << "Relatório de Viagens: ";
     for (auto& viagem : *viagens){
         if (viagem.isEmAndamento()){
             viagem.relatarEstado();
         }
     }
+    cout << "\n\n";
 
+    cout << "Relatório de Passageiros:";
     for (auto& passageiro : *passageiros){
-        cout << "Relatório de Transportes:\n";
-        cout << "Nome: " << passageiro.getNome() << endl;
-        cout << "Local Atual: " << passageiro.getLocalAtual();
+        cout << "\nNome: " << passageiro.getNome() << " | ";
+        cout << "Local Atual: " << passageiro.getLocalAtual()->getNome();
     }
+    cout << "\n\n";
 
+    cout << "Relatório de Transportes:";
     for (auto& transporte : *transportes){
-        cout << "Relatório de Transportes:\n";
-        cout << "Nome: " << transporte.getNome() << endl;
-        cout << "Local Atual: " << transporte.getLocalAtual();
+        cout << "\nNome: " << transporte.getNome() << " | ";
+        cout << "Local Atual: " << transporte.getLocalAtual()->getNome();
     }
-
+    cout << "\n\n";
     //relatar 5 cidades mais visitdas
 
     vector<Cidade> cidadesOrdenadas = *cidades;
@@ -381,9 +384,10 @@ void Controlador::relatarEstados(){
     });
 
     cout << "As 5 cidades mais visitadas são:\n";
-    for (int i = 0; i < 5 && i < cidadesOrdenadas.size(); ++i) {
+    for (size_t i = 0; i < 5 && i < cidadesOrdenadas.size(); ++i) {
         cout << cidadesOrdenadas[i].getNome() << " - Visitantes: " << cidadesOrdenadas[i].getVisitantes() << endl;
     }
+    cout << "\n\n";
 }
 
 Controlador::~Controlador(){

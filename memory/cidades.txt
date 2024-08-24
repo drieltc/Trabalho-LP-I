@@ -1,8 +1,8 @@
 Em_Transito,0
-Natal,0
+Natal,1
 Parnamirim,0
 Japecanga,0
-Parna,0
+Parna,1
 Macaíba,0
 Parnamoscow,0
 Mossoró,0
@@ -21,3 +21,4 @@ Rio_de_Janeiro,0
 Fortaleza,0
 Itaquecetuba,0
 Curitiba,0
+Porto,0

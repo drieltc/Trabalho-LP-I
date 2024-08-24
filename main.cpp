@@ -198,18 +198,13 @@ int main() {
                 avancarHora(control);
                 break;
             case 7:
-                // funcao para relatar estados
+                control->relatarEstados();
                 break;
             case 0:
                 running = false;
                 cout << "Encerrando\n";
 
                 control->salvarSair();
-                //salvar viagens
-                //salvar passageiros
-                //salvar transportes
-                //salvar trajetos
-                //salvar cidades
                 break;
             default:
                 cout << "Opção Inválida\n";

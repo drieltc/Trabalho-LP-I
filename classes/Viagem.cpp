@@ -119,14 +119,10 @@ void Viagem::relatarEstado() {
 
     // Listar os passageiros
     cout << "Passageiros: ";
-    if (passageiros.empty()) {
-        cout << "Nenhum passageiro a bordo." << endl;
-    } else {
-        for (auto& passageiro : passageiros) {
-            cout << passageiro->getNome() << ", ";
-        }
-        cout << endl;
+    for (auto& passageiro : passageiros) {
+        cout << passageiro->getNome() << ", ";
     }
+    cout << endl;
 
     // Tipo de transporte e nome do transporte
     cout << "Tipo de Transporte: " << (transporte->getTipo() == 'A' ? "Aquático" : "Terrestre") << endl;
