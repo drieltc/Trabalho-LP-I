@@ -353,7 +353,37 @@ void Controlador::salvarSair() {
 }
 
 void Controlador::relatarEstados(){
-    
+    for (auto& viagem : *viagens){
+        if (viagem.isEmAndamento()){
+            viagem.relatarEstado();
+        }
+    }
+
+    for (auto& passageiro : *passageiros){
+        cout << "Relatório de Transportes:\n";
+        cout << "Nome: " << passageiro.getNome() << endl;
+        cout << "Local Atual: " << passageiro.getLocalAtual();
+    }
+
+    for (auto& transporte : *transportes){
+        cout << "Relatório de Transportes:\n";
+        cout << "Nome: " << transporte.getNome() << endl;
+        cout << "Local Atual: " << transporte.getLocalAtual();
+    }
+
+    //relatar 5 cidades mais visitdas
+
+    vector<Cidade> cidadesOrdenadas = *cidades;
+
+    // Ordenar as cidades com base no número de visitantes em ordem decrescente
+    sort(cidadesOrdenadas.begin(), cidadesOrdenadas.end(), [](Cidade& a, Cidade& b) {
+        return a.getVisitantes() > b.getVisitantes();
+    });
+
+    cout << "As 5 cidades mais visitadas são:\n";
+    for (int i = 0; i < 5 && i < cidadesOrdenadas.size(); ++i) {
+        cout << cidadesOrdenadas[i].getNome() << " - Visitantes: " << cidadesOrdenadas[i].getVisitantes() << endl;
+    }
 }
 
 Controlador::~Controlador(){

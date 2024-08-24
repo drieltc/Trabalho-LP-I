@@ -13,7 +13,6 @@ class Viagem {
 private:
     Transporte* transporte;
     vector<Passageiro*> passageiros;
-    Cidade* origem;
     Trajeto* trajeto;
     Viagem* proxima;
     int horasEmTransito;

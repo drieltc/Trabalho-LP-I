@@ -114,9 +114,42 @@ void Viagem::avancarHoras(Cidade* emTransito) {
 }
 
 
-void Viagem::relatarEstado(){
-    cout << "FINALIZAR!!!!!";
+void Viagem::relatarEstado() {
+    cout << "Relatório do Estado da Viagem:" << endl;
+
+    // Listar os passageiros
+    cout << "Passageiros: ";
+    if (passageiros.empty()) {
+        cout << "Nenhum passageiro a bordo." << endl;
+    } else {
+        for (auto& passageiro : passageiros) {
+            cout << passageiro->getNome() << ", ";
+        }
+        cout << endl;
+    }
+
+    // Tipo de transporte e nome do transporte
+    cout << "Tipo de Transporte: " << (transporte->getTipo() == 'A' ? "Aquático" : "Terrestre") << endl;
+    cout << "Nome do Transporte: " << transporte->getNome() << endl;
+
+    // Cidade de origem e destino
+    cout << "Cidade de Origem: " << trajeto->getOrigem()->getNome() << endl;
+    cout << "Cidade de Destino: " << trajeto->getDestino()->getNome() << endl;
+
+    // Quanto tempo falta para chegar
+    int distanciaRestante = trajeto->getDistancia() - distanciaPercorrida;
+    int horasRestantes = (distanciaRestante + transporte->getVelocidade() - 1) / transporte->getVelocidade(); // Calcula as horas restantes arredondando para cima
+    cout << "Tempo Restante (em horas): " << horasRestantes << endl;
+
+    // Status de descanso do transporte
+    if (transporte->getDescansando()) {
+        cout << "Status: O transporte está descansando." << endl;
+        cout << "Tempo de descanso restante: " << transporte->getTempoDescanso() - transporte->getTempoDescansoAtual() << " horas" << endl;
+    } else {
+        cout << "Status: O transporte está em movimento." << endl;
+    }
 }
+
 
 void Viagem::setDistanciaPercorrida(int distancia){
     this->distanciaPercorrida = distancia;
